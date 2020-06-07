@@ -1,9 +1,3 @@
 [submodule "nasoq"]
 	path = nasoq
 	url = https://github.com/sympiler/nasoq
-
-[submodule "osqp"]
-	path = osqp
-	url = https://github.com/oxfordcontrol/osqp
-
-
