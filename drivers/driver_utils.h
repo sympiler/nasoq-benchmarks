@@ -69,6 +69,15 @@ namespace nasoq_bench{
   return true;
  }
 
+
+ void print_header(){
+  std::cout<<"Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,"
+             "Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,"
+             "eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,"
+             "Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,"
+             "Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,"
+             "Problem Type,Problem Class,\n";
+ }
 }
 
 #endif //NASOQ_BENCHMARKS_DRIVER_UTILS_H

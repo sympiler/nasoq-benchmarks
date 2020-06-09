@@ -261,7 +261,7 @@ int main(int argc, char **argv) {
  std::string input_qp_path = qp_args["input"];
  double reg_diag = pow(10,-9);
  double zero_threshold = reg_diag;
- double eps = 1e-6;
+ double eps = 1e-3;
  int inner_iter = 2;
  int outer_iter = 2;
  double stop_tol = 1e-15;
@@ -273,10 +273,11 @@ int main(int argc, char **argv) {
    solver_mode = 1;
   }
  }
+ if(qp_args.find("epsilon") != qp_args.end())
+  eps = pow(10, std::stoi(qp_args["epsilon"]) );
  if(qp_args.find("header") != qp_args.end())
   print_header = true;
 
-std::cout<<"args\n";
  // Load problem data
  int is_polish = 0;
  c_float *P_x, *Pu_x;
@@ -302,18 +303,13 @@ std::cout<<"args\n";
  if(!QPFC->load_smp(input_qp_path))
   return -1;
  QPFC->smp_to_bounded();
- std::cout<<"args\n";
  p_name = QPFC->smp_->desc_struct_.name_;
  n = QPFC->num_var();
  m = QPFC->bf_->A ? QPFC->bf_->A->m : 0;
  P_nnz = QPFC->bf_->H->nnz;
  A_nnz = QPFC->bf_->A ? QPFC->bf_->A->nnz : 0;
  // To keep the default setting of OSQP
- for (int j = 0; j < m; ++j) {
-  for (int i = QPFC->bf_->A->p[j]; i < QPFC->bf_->A->p[j + 1]; ++i) {
-   std::cout<<QPFC->bf_->A->i[i]<<" "<<j<<" "<<QPFC->bf_->A->x<<"\n";
-  }
- }
+
  auto int_to_cint =[](int *t, int n){
   auto *tc = new c_int[n]();
   for (int i = 0; i < n; ++i) {
@@ -343,16 +339,11 @@ std::cout<<"args\n";
  //sym_lib::print_csc(n,n,HT->p, HT->i, HT->x);
 
 
- std::cout<<"mats\n"<<n<<","<<m<<","<<A_nnz<<","<<P_nnz<<"\n";
  A_p = int_to_cint(QPFC->bf_->A->p,m+1);
  A_i = int_to_cint(QPFC->bf_->A->i,A_nnz);
  A_x = double_to_cfloat(QPFC->bf_->A->x,A_nnz);
 
- for (int j = 0; j < m; ++j) {
-  for (int i = A_p[j]; i < A_p[j + 1]; ++i) {
-   std::cout<<A_i[i]<<" "<<j<<" "<<A_x<<"\n";
-  }
- }
+
  c_float *x_exp;
 // if (!read_vector_osqp(f6,n,x_exp))
 //  return -1;
@@ -420,6 +411,8 @@ std::cout<<"args\n";
    data->A->x,work->solution->x,work->solution->y,
    data->l, data->u, work->Ax);
 
+ if(print_header)
+  nasoq_bench::print_header();
 
  comp_slack2 = compute_slackness_osqp(data->A->m,data->A->n,
    data->A->p,data->A->i,data->A->x,work->solution->x,
@@ -436,6 +429,7 @@ std::cout<<"args\n";
  std::cout<<work->info->pri_res<<","<<work->info->dua_res<<",";
  std::cout<<work->info->obj_val<<","<<"N/A"<<",N/A,";
  std::cout<<nonnegativity<<","<<comp_slack2<<","<<QPFC->smp_->desc_struct_.application_<<",";
+ std::cout<<QPFC->smp_->desc_struct_.category_<<",";
 
  // Clean workspace
  osqp_cleanup(work);
@@ -446,7 +440,6 @@ std::cout<<"args\n";
 
  delete HT;
  delete QPFC;
- //c_free(x_exp);
 
 
  return exitflag;
