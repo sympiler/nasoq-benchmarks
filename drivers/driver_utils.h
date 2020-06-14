@@ -4,6 +4,11 @@
 
 #ifndef NASOQ_BENCHMARKS_DRIVER_UTILS_H
 #define NASOQ_BENCHMARKS_DRIVER_UTILS_H
+
+
+#include <io.h>
+#include "../nasoq/common/def.h"
+
 namespace nasoq_bench{
 
  bool parse_args(int argc, char **argv, std::map<std::string, std::string> &qp_args) {
@@ -77,6 +82,24 @@ namespace nasoq_bench{
              "Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,"
              "Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,"
              "Problem Type,Problem Class,\n";
+ }
+
+
+ // TODO: remove this hack
+
+ nasoq::CSC *new_to_old(format::CSC *in_csc){
+  if(!in_csc)
+   return NULLPNTR;
+  nasoq::CSC *tmp = new nasoq::CSC;
+  tmp->p = in_csc->p;
+  tmp->i = in_csc->i;
+  tmp->x = in_csc->x;
+  tmp->nzmax =in_csc->nnz;
+  tmp->nrow = in_csc->m;
+  tmp->ncol = in_csc->n;
+  tmp->stype = in_csc->stype == format::LOWER ? -1 : 0;
+  tmp->sorted=1; tmp->packed=1;
+  return tmp;
  }
 }
 
