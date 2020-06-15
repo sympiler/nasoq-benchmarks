@@ -237,7 +237,7 @@ std::string  p_name = QPFC->smp_->desc_struct_.name_;
  delete []x;
  if(me>0)
   delete []u;
- if(me>0)
+ if(mie>0)
   delete []w;
  delete QPFC;
  return 1;

@@ -441,7 +441,15 @@ int main(int argc, char **argv) {
 
  delete HT;
  delete QPFC;
-
+ delete []q;
+ delete []l;
+ delete []u;
+ delete []P_i;
+ delete []P_x;
+ delete []P_p;
+ delete []A_i;
+ delete []A_x;
+ delete []A_p;
 
  return exitflag;
 }

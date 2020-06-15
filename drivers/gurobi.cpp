@@ -249,7 +249,7 @@ if(qp_type == 2){
  delete []x;
  if(me>0)
   delete []u;
- if(me>0)
+ if(mie>0)
   delete []w;
  delete QPFC;
  return 1;

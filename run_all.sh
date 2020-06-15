@@ -8,11 +8,11 @@ if [ "$#" -ge 2 ]; then
 DATASET=$1
 BUILDIR=$2
 fi
-
+eps=-3
 echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
 
 
-for eps in {-3,-6,-9}; do
+#for eps in {-3,-6,-9}; do
  echo "Running NASOQ-Fixed ..."
  bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps> logs/nasoq-fixed-e${eps}.csv
 
@@ -33,12 +33,12 @@ for eps in {-3,-6,-9}; do
 
  echo "Running Mosek ..."
  bash scripts/NASOQ_bench.sh $BUILDIR/drivers/mosek-bench $DATASET $eps > logs/mosek-e${eps}.csv
-done
+#done
 sed -e "/Academic license - for non-commercial use only/d" -i logs/gurobi-*
 echo "CSV files are generated in logs/"
 echo "Plotting ..."
 cd scripts/python_scripts/;
-for eps in {-3,-6,-9}; do
+#for eps in {-3,-6,-9}; do
  python graph_generator.py -d ../../logs/ -s $eps
-done
+#done
 rm -f *.txt
