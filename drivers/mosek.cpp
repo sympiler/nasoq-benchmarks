@@ -9,7 +9,6 @@
 #include <mp_format_converter.h>
 #include "Eigen_utils.h"
 #include "qp_utils.h"
-#include "qp_format_converter.h"
 #include "driver_utils.h"
 
 
