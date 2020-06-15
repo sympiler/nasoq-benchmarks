@@ -226,6 +226,8 @@ if(qp_type == 2){
                                                    A_old,AT_old,q_o,x,
                                                    w,u);
 
+ if(print_header)
+  nasoq_bench::print_header();
 
  std::cout<<"Gurobi,";
  QPFC->print_log();
@@ -235,7 +237,8 @@ if(qp_type == 2){
           <<",N/A,";
  std::cout<<cs_norm<<","<<lag_norm<<","<<obj_ql<<",N/A,N/A,";
  std::cout<<nn_norm<<","<<comp_norm<<",";
-
+ std::cout<<QPFC->smp_->desc_struct_.application_<<",";
+ std::cout<<QPFC->smp_->desc_struct_.category_<<",";
 /* std::cout<<"Primal: \n";
  for (int j = 0; j < 20; ++j) {
   std::cout<<primal[j]<<";";

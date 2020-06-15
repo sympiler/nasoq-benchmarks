@@ -214,6 +214,9 @@ std::string  p_name = QPFC->smp_->desc_struct_.name_;
  double lag_norm = nasoq::lagrangian_residual_norm(H_old,C_old,CT_old,
                                            A_old,AT_old,q_o,x,
                                             w,u);
+
+ if(print_header)
+  nasoq_bench::print_header();
  std::cout<<"MOSEK,";
  QPFC->print_log();
  std::cout<<num_thread<<","<<eps<<",N/A,N/A,N/A,N/A,"<<

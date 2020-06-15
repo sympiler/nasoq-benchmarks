@@ -1,24 +1,44 @@
 #!/bin/bash
-DATASET=/home/kazem/SMP_Repository/alligator/
-BUILDIR=/home/kazem/development/nasoq-benchmarks/cmake-build-debug/
 
 
-## NASOQ
-bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET -3> logs/nasoq-fixed-e3.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET -6> logs/nasoq-fixed-e6.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET -9> logs/nasoq-fixed-e9.csv
+DATASET=SMP_Repository/
+BUILDIR=build/
 
-## NASOQ-Tuned
-bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET -3 "-v tuned"> logs/nasoq-tuned-e3.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET -6 "-v tuned"> logs/nasoq-tuned-e6.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET -9 "-v tuned"> logs/nasoq-tuned-e9.csv
+if [ "$#" -ge 2 ]; then
+DATASET=$1
+BUILDIR=$2
+fi
 
-## OSQP
-bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET -3> logs/osqp-e3.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET -6> logs/osqp-e6.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET -9> logs/osqp-e9.csv
+echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
 
-## OSQP-Polished
-bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET -3 "-v polished"> logs/osqp-polished-e3.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET -6 "-v polished"> logs/osqp-polished-e6.csv
-bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET -9 "-v polished"> logs/osqp-polished-e9.csv
+
+for eps in {-3,-6,-9}; do
+ echo "Running NASOQ-Fixed ..."
+ bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps> logs/nasoq-fixed-e${eps}.csv
+
+ echo "Running NASOQ-Tuned ..."
+ bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-v tuned"> logs/nasoq-tuned-e${eps}.csv
+
+ echo "Running customized NASOQ ..."
+ bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-v predet -r 0"> logs/nasoq-custom-e${eps}.csv
+
+ echo "Running OSQP ..."
+ bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET $eps> logs/osqp-e${eps}.csv
+
+ echo "Running OSQP-polished ..."
+ bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET $eps "-v polished"> logs/osqp-polished-e${eps}.csv
+
+ echo "Running Gurobi ..."
+ bash scripts/NASOQ_bench.sh $BUILDIR/drivers/gurobi-bench $DATASET $eps > logs/gurobi-e${eps}.csv
+
+ echo "Running Mosek ..."
+ bash scripts/NASOQ_bench.sh $BUILDIR/drivers/mosek-bench $DATASET $eps > logs/mosek-e${eps}.csv
+done
+sed -e "/Academic license - for non-commercial use only/d" -i logs/gurobi-*
+echo "CSV files are generated in logs/"
+echo "Plotting ..."
+cd scripts/python_scripts/;
+for eps in {-3,-6,-9}; do
+ python graph_generator.py -d ../../logs/ -s $eps
+done
+rm -f *.txt

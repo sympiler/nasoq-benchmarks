@@ -1,0 +1,3 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+MOSEK,matt_qp1,234,1182,0,0,30,164,6,1e-09,N/A,N/A,N/A,N/A,1,13,0.016746,N/A,0,0.00182012,-1991.83,N/A,N/A,3.02234e-07,1.85416e-06,contact simulation,computer graphics,
+MOSEK,test05_0,185,185,125,2196,60,1890,6,1e-09,N/A,N/A,N/A,N/A,1,10,0.0245611,N/A,8.37624e-10,3.99554e-06,4.98204,N/A,N/A,1.66489e-10,2.19453e-09,model predictive control,robotics,

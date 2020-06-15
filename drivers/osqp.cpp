@@ -339,7 +339,7 @@ int main(int argc, char **argv) {
  //sym_lib::print_csc(n,n,HT->p, HT->i, HT->x);
 
 
- A_p = int_to_cint(QPFC->bf_->A->p,m+1);
+ A_p = int_to_cint(QPFC->bf_->A->p,n+1);
  A_i = int_to_cint(QPFC->bf_->A->i,A_nnz);
  A_x = double_to_cfloat(QPFC->bf_->A->x,A_nnz);
 
@@ -377,6 +377,7 @@ int main(int argc, char **argv) {
  settings->polish = is_polish;
  settings->verbose = 0;
  settings->time_limit = 2000.0;
+ settings->scaling = 0;
 /* settings->polish = 1;
  settings->verbose = 1;
  settings->eps_abs=1e-20;
