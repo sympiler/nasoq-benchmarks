@@ -47,7 +47,7 @@ solvers.
 
 ### Downloading the dataset
 ```bash
-wget 
+wget https://www.dropbox.com/s/hxhelt273ajh00w/SMP_Repository_SIGGRAPH20.tgz?dl=0 
 ```
 ### Running solvers
 A script is provided that run all tools for specified dataset.
@@ -59,4 +59,7 @@ bash run_all path/to/dataset/ path/to/build/directory/
 The script finds all sparse QP problems stored in `yml`  and 
 run all solvers for each of them for three different ranges of 
 accuracy, i.e., 1e-3, 1e-6, and 1e-9. 
+
+### Adding a solver
+Check [here](https://nasoq.github.io/docs/repository/#adding-a-new-solver) for instructions. 
 
