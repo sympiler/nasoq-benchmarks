@@ -37,7 +37,7 @@ cmake flags.
 ```bash
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DMETIS_ROOT_PATH=path/to/metis-5.1.0/build/Linux-x86_64/ ..
+cmake -DMKL_ROOT_PATH=path/to/intel -DMETIS_ROOT_PATH=path/to/metis-5.1.0/build/Linux-x86_64/ -DCMAKE_BUILD_TYPE=Release ..
 make
 ```
 
