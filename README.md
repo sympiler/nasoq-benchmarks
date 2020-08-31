@@ -1,5 +1,8 @@
 # nasoq_benchmarks
 
+The latest evaluation across problems of the [SMP repository](https://nasoq.github.io/smp.html) for different solvers 
+in our benchmark:
+![image](last_eval.png)
 
 ## Building benchmark
 OSQP and NASOQ are already in the repository however, 
