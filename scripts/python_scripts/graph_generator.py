@@ -16,7 +16,7 @@ from matplotlib import colors as mcolors
 from os.path import basename
 from operator import itemgetter, attrgetter, methodcaller
 from osqp_utils import compute_failure_rates,compute_performance_profiles,plot_performance_profiles,\
-    exclude_items,compute_speedup,exclude_items_general
+    plot_speedup, exclude_items,compute_speedup,exclude_items_general
 
 INV='N/A'
 
@@ -456,19 +456,19 @@ class Visualizer:
                 red_tol_log.append(lst1)
 
         for red_log in red_tol_log:
-            if len(red_log) > 0:
-                if "OSQP-polished" not in red_log[0][self.qp_header[self.qp_log_header.TOOLN.value]]:
-                    continue
+            # if len(red_log) > 0:
+                # if "OSQP-polished" not in red_log[0][self.qp_header[self.qp_log_header.TOOLN.value]]:
+                    # continue
             for i in range(len(red_log)):
-                if "OSQP-polished" in red_log[i][self.qp_header[self.qp_log_header.TOOLN.value]]:
-                    full_name = red_log[i][self.qp_header[self.qp_log_header.PROBN.value]]
-                    mat_full_name = full_name.split('/')
-                    mat_name = mat_full_name[len(mat_full_name) - 1].split('.')[0]
-                    # mat_name = mat_name.split('_')
-                    us_pos = mat_name.rfind('_')
-                    if us_pos > 0:
-                        mat_name = mat_name[0:us_pos]
-                    self.qp2size[mat_name] = self.compute_qp_size(red_log[i])
+                # if "OSQP-polished" in red_log[i][self.qp_header[self.qp_log_header.TOOLN.value]]:
+                full_name = red_log[i][self.qp_header[self.qp_log_header.PROBN.value]]
+                mat_full_name = full_name.split('/')
+                mat_name = mat_full_name[len(mat_full_name) - 1].split('.')[0]
+                # mat_name = mat_name.split('_')
+                us_pos = mat_name.rfind('_')
+                if us_pos > 0:
+                    mat_name = mat_name[0:us_pos]
+                self.qp2size[mat_name] = self.compute_qp_size(red_log[i])
 
 
 
@@ -1266,6 +1266,7 @@ def main(argv):
                               problem_type, tol_str)
         plot_performance_profiles(problem_type,
                                   tool_names, tol_str)
+        plot_speedup(problem_type, tol_str)
         # min_fr = 100
         # min_log = []
         # all_reduced_logs = []

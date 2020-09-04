@@ -16,11 +16,10 @@ set(GUROBI_LIB "$ENV{GUROBIROOT}/lib")
 
 
 add_subdirectory(nasoq)
-add_subdirectory(osqp)
+# add_subdirectory(osqp)
 
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/nasoq/common/ ${CMAKE_CURRENT_LIST_DIR}/smp-format/)
 set(OSQP_INC osqp/include/)
 
 add_subdirectory(drivers)
-

@@ -14,7 +14,6 @@ echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
 
 #for eps in {-3,-6,-9}; do
  echo "Running NASOQ-Fixed ..."
- echo ${BUILDIR} ${DATASET}
  bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps> logs/nasoq-fixed-e${eps}.csv
 
  echo "Running NASOQ-Tuned ..."

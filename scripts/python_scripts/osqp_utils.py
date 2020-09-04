@@ -136,7 +136,7 @@ def plot_performance_profiles(problems, solvers, tol=''):
     Plot performance profiles in matplotlib for specified problems and solvers
     """
     df = pd.read_csv('./results_%s_performance_profiles.csv' % problems)
-    plt.figure(0)
+    plt.figure()
     for solver in solvers:
         plt.plot(df["tau"], df[solver], label=solver)
     plt.xlim(1., 10000.)
@@ -149,8 +149,54 @@ def plot_performance_profiles(problems, solvers, tol=''):
     results_file = './results_perfprofile_%s_%s.png' % (problems, tol)
     print("Saving plots to %s" % results_file)
     plt.savefig(results_file, dpi=100)
-    plt.show(block=False)
+    # plt.show(block=False)
 
+def plot_speedup(problem_type, tol):
+    """
+    Plot speedups and their standard error in matplotlib for specified problems and solvers
+    """
+
+    # read out data from csv and get all data for plotting
+    df = pd.read_csv('./speedup_{}_{}_results.csv'.format(problem_type, tol))
+    # plt.figure(figsize=(15, 15))
+    plt.figure()
+    tools = df['Tool name'].tolist()
+    avg_speedups = df["Average speedup"].tolist()
+    max_speedups = df["Max"].tolist()
+    min_speedups = df["Min"].tolist()
+    median_speedups = df["Median"].tolist()
+    sdes = df["SDE"].tolist()
+    print("avg_speedup: ", avg_speedups)
+    print("max speedup: ", max_speedups)
+    print("min speedup: ", min_speedups)
+    print("median_speedup: ", median_speedups)
+
+    # plot speedups
+    x = np.arange(0, len(tools) * 2, 2)
+    plt.bar(x, avg_speedups, label="avg speedup", width=0.4)
+    plt.bar(x + 0.4, max_speedups, label="max speedup", width=0.4)
+    plt.bar(x + 0.8, min_speedups, label="min speedup", width=0.4)
+    plt.bar(x + 1.2, median_speedups, label="median speedup", width=0.4)
+    plt.xticks(x + 0.6, tools)
+    # plt.yticks(np.arange(0, np.max(max_speedups) + 0.05, 0.05))
+    plt.xlabel("tools")
+    plt.ylabel("average speedup across problems (tol = {})".format(tol))
+    plt.legend()
+    plt.title("speedups of each method in problem {} and tol = {}".format(problem_type, tol))
+    plt.savefig("barchart_speedups_{}_{}.png".format(problem_type, tol))
+
+    # plot speedup standard errors
+    plt.figure(figsize=(8, 8))
+    ids = np.arange(0, len(tools))
+    plt.bar(ids, sdes, width=0.5)
+    plt.yticks(np.arange(0, max(sdes) + 0.02, 0.02))
+    plt.xticks(ids, tools)
+    plt.xlabel("tools")
+    plt.ylabel("speedup standard error")
+    plt.title("speedup standared errors for each method in problem {} and tol = {}".format(problem_type, tol))
+    plt.savefig("speedup_standard_error_{}_tol{}.png".format(problem_type, tol))
+
+    print("The average speedup bar chart and their standard errors have been drawn.")
 
 def exclude_items(log_lst, del_items, key_items):
     res = [i for i in log_lst if (not del_items  == i[key_items] )]
