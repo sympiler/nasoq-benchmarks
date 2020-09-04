@@ -104,13 +104,13 @@ def compute_failure_rates(solvers, problems_type, tol=''):
 
     # Check if results file already exists
     results_file = os.path.join(".", "failure_" + problems_type + "_"+tol+
-                                "_results.txt")
+                                "_results.csv")
 
     f_rate = {}
     # Always overwrite file
     f = open(results_file, "w")
 
-    f.write('[Failure rates]\n')
+    #f.write('[Failure rates]\n')
     for solver in solvers:
         # results_file = os.path.join('.', 'results', problems_type,
         #                             solver, 'results.csv')
@@ -125,7 +125,7 @@ def compute_failure_rates(solvers, problems_type, tol=''):
         n_failed_problems = np.sum(failed_statuses)
         failure_rate = n_failed_problems / n_problems
         f_rate[solver] = failure_rate
-        f.write(" - %s = %.4f %%\n" % (solver, 100 * failure_rate))
+        f.write("%s , %.4f \n" % (solver, 100 * failure_rate))
     f.write("\n")
 
     f.close()
@@ -145,10 +145,11 @@ def plot_performance_profiles(problems, solvers, tol=''):
     plt.ylabel('Ratio of problems solved (tol = %s)' %tol)
     plt.xscale('log')
     plt.legend()
-    plt.grid()
+    #plt.grid()
+    #plt.grid(None)
     results_file = './results_perfprofile_%s_%s.png' % (problems, tol)
     print("Saving plots to %s" % results_file)
-    plt.savefig(results_file, dpi=100)
+    plt.savefig(results_file, dpi=300)
     plt.show(block=False)
 
 
@@ -166,6 +167,14 @@ def compare_size(l_item, thresh, idx):
 def exclude_items_general(log_lst, condition):
     res = [i for i in log_lst if (condition(i))]
     return res
+
+
+def geom_mean(t, shift=10.):
+    """Compute the shifted geometric mean using formula from
+    http://plato.asu.edu/ftp/shgeom.html
+    NB. Use logarithms to avoid numeric overflows
+    """
+    return np.exp(np.sum(np.log(np.maximum(1, t + shift))/len(t))) - shift
 
 
 def compute_speedup(solvers, ref_solver, problems_type, tol=''):
@@ -213,7 +222,9 @@ def compute_speedup(solvers, ref_solver, problems_type, tol=''):
             else:
                 r[s][p] = 0 # make it zero so it does not affect avg
 
-
+    gmean = {}
+    for s in solvers:
+        gmean[s] = geom_mean(t[s],1)
     # Store final pandas dataframe
     speedup_new = {}
     speedup_file = os.path.join('.', 'speedup' + '_' +
@@ -221,7 +232,7 @@ def compute_speedup(solvers, ref_solver, problems_type, tol=''):
                                                             'results.csv')
 
     header = ['Tool name', 'Average speedup', 'Max', 'Min', 'SDE', 'Median', '# of slower', '# of 2X slower',
-              'Tol', 'Problem type', '# of problems']
+              'Tol', 'Problem type', '# of problems', 'G-Mean']
     tmp_dic = {}
     with open(speedup_file, 'w') as csv_file:
         writer = csv.DictWriter(csv_file,fieldnames=header)
@@ -264,6 +275,7 @@ def compute_speedup(solvers, ref_solver, problems_type, tol=''):
             tmp_dic[header[8]] = tol
             tmp_dic[header[9]] = problems_type
             tmp_dic[header[10]] = n_problems
+            tmp_dic[header[11]] = gmean[s]
             writer.writerow(tmp_dic)
 
 def get_name(s):
@@ -317,9 +329,11 @@ def plot_bar_chart(all_data, tool_name, y_label, file_name,font0):
     ax1.set_xticks(ind)
     ax1.set_xticklabels(x_label, fontsize=5)
     # ax1.tick_params(axis='x', which='minor', direction='out', bottom=True)
+    #ax1.grid(False)
+    plt.grid(None)
     plt.xticks(rotation=55)
     plt.legend(loc='upper right')
-    results_file = file_name
+    results_file = file_name+'.pdf'
     print("Saving plots to %s" % results_file)
-    plt.savefig(results_file, dpi=100)
+    plt.savefig(results_file, dpi=500)
     plt.show()
