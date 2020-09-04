@@ -1266,7 +1266,7 @@ def main(argv):
                               problem_type, tol_str)
         plot_performance_profiles(problem_type,
                                   tool_names, tol_str)
-        plot_speedup(problem_type, tol_str)
+        plot_speedup(problem_type, "NASOQ-Fixed", tol_str)
         # min_fr = 100
         # min_log = []
         # all_reduced_logs = []

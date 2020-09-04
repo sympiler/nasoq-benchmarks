@@ -330,6 +330,27 @@ def compute_speedup_general(list, ref_idx):
             speed_up[i, j] = list[ref_idx, j] / list[i, j]
     return speed_up
 
+def plot_speedup(problem_type, ref_method, tol):
+    """
+    compute the speedup of each solver over the given reference method
+    :param problem_type: the type of problem
+    :param ref_method: the method to compare for computing speedup
+    :param tol: accuracy rate
+    :return: a bar chart of speedups
+    """
+    df = pd.read_csv('./speedup_{}_{}_results.csv'.format(problem_type, tol))
+    plt.figure()
+    tools = df['Tool name'].tolist()
+    g_mean = df['G-Mean'].tolist()
+    gmean_ref_time = g_mean[tools.index(ref_method)]
+    x = np.arange(len(tools))
+    plt.bar(x, gmean_ref_time / np.array(g_mean))
+    plt.xticks(x, tools)
+    plt.xlabel('tool name')
+    plt.ylabel('geometric mean of speedups across problems(tol={})'.format(tol))
+    plt.title("speedups of each method over {} (tol={})".format(ref_method, tol))
+    plt.savefig("barchart_speedups_{}_{}.png".format(problem_type, tol))
+    print("the plotting on speedups done")
 
 def plot_bar_chart(all_data, tool_name, y_label, file_name,font0):
     colors = ('red', 'skyblue', 'indigo', 'olive', 'slateblue', 'magenta',
