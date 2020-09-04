@@ -16,7 +16,7 @@ from matplotlib import colors as mcolors
 from os.path import basename
 from operator import itemgetter, attrgetter, methodcaller
 from osqp_utils import compute_failure_rates,compute_performance_profiles,plot_performance_profiles,\
-    plot_speedup, exclude_items,compute_speedup,exclude_items_general
+    plot_speedup, plot_failure_rate, exclude_items,compute_speedup,exclude_items_general
 
 INV='N/A'
 
@@ -1267,6 +1267,7 @@ def main(argv):
         plot_performance_profiles(problem_type,
                                   tool_names, tol_str)
         plot_speedup(problem_type, "NASOQ-Fixed", tol_str)
+        plot_failure_rate(problem_type, tol_str)
         # min_fr = 100
         # min_log = []
         # all_reduced_logs = []

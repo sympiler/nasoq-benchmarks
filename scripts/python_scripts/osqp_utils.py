@@ -109,9 +109,13 @@ def compute_failure_rates(solvers, problems_type, tol=''):
     f_rate = {}
     # Always overwrite file
     f = open(results_file, "w")
+    header = ["Tool", "Failure rate * 100"]
+    writer = csv.DictWriter(f, fieldnames=header)
+    writer.writeheader()
 
     #f.write('[Failure rates]\n')
     for solver in solvers:
+        f_rate[header[0]] = solver
         # results_file = os.path.join('.', 'results', problems_type,
         #                             solver, 'results.csv')
         file_name = "results_" + problems_type + "_" + solver + "_statistics.txt"
@@ -124,9 +128,10 @@ def compute_failure_rates(solvers, problems_type, tol=''):
                                            for s in SOLUTION_PRESENT],True)
         n_failed_problems = np.sum(failed_statuses)
         failure_rate = n_failed_problems / n_problems
-        f_rate[solver] = failure_rate
-        f.write("%s , %.4f \n" % (solver, 100 * failure_rate))
-    f.write("\n")
+        f_rate[header[1]] = 100 * failure_rate
+        # f.write("%s , %.4f \n" % (solver, 100 * failure_rate))
+        writer.writerow(f_rate)
+    # f.write("\n")
 
     f.close()
     return f_rate
@@ -345,7 +350,7 @@ def compute_speedup_general(list, ref_idx):
 
 def plot_speedup(problem_type, ref_method, tol):
     """
-    compute the speedup of each solver over the given reference method
+    plot the speedup of each solver over the given reference method
     :param problem_type: the type of problem
     :param ref_method: the method to compare for computing speedup
     :param tol: accuracy rate
@@ -363,7 +368,29 @@ def plot_speedup(problem_type, ref_method, tol):
     plt.ylabel('geometric mean of speedups across problems(tol={})'.format(tol))
     plt.title("speedups of each method over {} (tol={})".format(ref_method, tol))
     plt.savefig("barchart_speedups_{}_{}.png".format(problem_type, tol))
-    print("the plotting on speedups done")
+    print("the plotting on speedups done.")
+
+def plot_failure_rate(problem_type, tol):
+    """
+    plot the failure rate (scaled up by 100) of each method
+    :param problem_type: the type of the problem
+    :param tol: the user requested accuracy
+    :return: a plot of the failure rate for each method
+    """
+    df = pd.read_csv('./failure_{}_{}_results.csv'.format(problem_type, tol))
+    tools = df['Tool'].tolist()
+    failure_rates = df['Failure rate * 100'].tolist()
+
+    plt.figure()
+    ids = np.arange(len(tools))
+    plt.bar(ids, failure_rates)
+    plt.xticks(ids, tools)
+    plt.xlabel("tool name")
+    plt.ylabel("failure rate scaled up by 100 (tol = {})".format(tol))
+    plt.title("failure rate of each method over {} (tol={})".format(problem_type, tol))
+    plt.savefig("barchart_failure_rate_{}_{}.png".format(problem_type, tol))
+    print("the plotting on failure rates done.")
+
 
 def plot_bar_chart(all_data, tool_name, y_label, file_name,font0):
     colors = ('red', 'skyblue', 'indigo', 'olive', 'slateblue', 'magenta',
