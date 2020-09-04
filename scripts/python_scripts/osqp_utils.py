@@ -149,13 +149,9 @@ def plot_performance_profiles(problems, solvers, tol=''):
     #plt.grid(None)
     results_file = './results_perfprofile_%s_%s.png' % (problems, tol)
     print("Saving plots to %s" % results_file)
-<<<<<<< HEAD
     plt.savefig(results_file, dpi=100)
     # plt.show(block=False)
-=======
     plt.savefig(results_file, dpi=300)
-    plt.show(block=False)
->>>>>>> master
 
 def plot_speedup(problem_type, tol):
     """
