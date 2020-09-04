@@ -153,7 +153,7 @@ def plot_performance_profiles(problems, solvers, tol=''):
     # plt.show(block=False)
     plt.savefig(results_file, dpi=300)
 
-def plot_speedup(problem_type, tol):
+def plot_speedup_old(problem_type, tol):
     """
     Plot speedups and their standard error in matplotlib for specified problems and solvers
     """
