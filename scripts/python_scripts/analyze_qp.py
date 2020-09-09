@@ -239,10 +239,11 @@ def main():
 	writer = csv.DictWriter(analysis, fieldnames=header)
 	writer.writeheader()
 
+	# write out a csv for summary of analysis
 	for qp in QPs:
 		prop_dict = qp.map_props()
 		writer.writerow(prop_dict)
-		print(qp)
+
 	return 0
 
 if __name__ == "__main__":
