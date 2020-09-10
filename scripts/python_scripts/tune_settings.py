@@ -39,8 +39,8 @@ def main():
                     call(["bash", "../NASOQ_bench.sh", "../../{}/nasoq/NASOQ-BIN".format(build_folder), dataset, eps, \
                         "-p {} -r {} -t {} -v predet".format(diag_perturb, max_iter, stop_tol), ">", "../../logs/nasoq-custom-e{}.csv".format(eps)])
 
-                    call(["python", "graph_generator.py", "-d ../../logs/ -s", eps])
-                    call(["mv", "*.png", "../../setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb)])
+                    call(["python", "graph_generator.py", "-d", "../../logs/", "-s", eps, ">", \
+                        "../../setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb)])
 
 if __name__ == "__main__":
     # for i in range(10):
