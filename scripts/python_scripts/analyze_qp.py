@@ -2,8 +2,11 @@ import yaml
 import os
 import sys
 import csv
+import time
 import numpy as np
 import pandas as pd
+import scipy.sparse as sp
+import scipy.sparse.linalg as la
 
 header = ["Problem name", "Problem category", "Problem source", "Application", "Number of variables", \
 		"QP dimension", "QP norm (order = infty)", "QP condition (2-norm)", "QP min", "QP max", "QP nonzeros", \
@@ -28,7 +31,7 @@ class properties:
 		# the norm of Quadratic problem matrix
 		self.qp_norm = 0
 		# the cond number of Quadratic problem matrix
-		self.qp_cond = 0
+		self.qp_cond = "\\"
 		# the number of non-zero entries in Quadratic problem matrix
 		self.qp_nnz = 0
 		# the max entry of Quadratic problem matrix
@@ -75,7 +78,7 @@ class properties:
 		result += "	Number of variables: " + str(self.vars_num) + "\n"
 		result += "	QP dimension: " + str(self.qp_dim) + "\n"
 		result += "	QP norm (order = infty): " + str(self.qp_norm) + "\n"
-		result += "	QP condition (2-norm): " + str(self.qp_cond) + "\n"
+		# result += "	QP condition (2-norm): " + str(self.qp_cond) + "\n"
 		result += "	QP min:"  + str(self.qp_min) + "\n"
 		result += "	QP max: " + str(self.qp_max) + "\n"
 		result += "	QP nonzeros: " + str(self.qp_nnz) + "\n"
@@ -83,8 +86,8 @@ class properties:
 		result += "	Number of inequality constraints: " + str(self.inequal_constr_num) + "\n"
 		result += "	equality norm (order = infty): " + str(self.equal_constr_norm) + "\n"
 		result += "	inequality norm (order = infty): " + str(self.inequal_constr_norm) + "\n"
-		result += "	equality condition number (2-norm): " + str(self.equal_constr_cond) + "\n"
-		result += "	inequality condition number (2-nrom): " + str(self.inequal_constr_cond) + "\n"
+		# result += "	equality condition number (2-norm): " + str(self.equal_constr_cond) + "\n"
+		# result += "	inequality condition number (2-nrom): " + str(self.inequal_constr_cond) + "\n"
 		result += "	equality nonzeros: " + str(self.equal_constr_nnz) + "\n"
 		result += "	inequality nonzeros: " + str(self.inequal_constr_nnz) + "\n"
 		result += "	equality max: " + str(self.equal_constr_max) + "\n"
@@ -162,16 +165,19 @@ def analyze(path="test05_0.yml"):
 	props.qp_dim = qp_des[0]
 	props.qp_nnz = qp_des[2]
 
-	qp_matrix = np.float64(np.zeros((qp_des[0], qp_des[1])))
+	qp_matrix = sp.lil_matrix((qp_des[0], qp_des[1]))
 	# form the QP matrix
 	for i in range(qp_des[2]):
 		entry = qp_str[i].split(" ")
 		qp_matrix[np.int32(entry[0]) - 1, np.int32(entry[1]) - 1] = np.float64(entry[2])
 
-	props.qp_norm = np.linalg.norm(qp_matrix, ord=np.inf)
-	props.qp_cond = np.linalg.cond(qp_matrix)
-	props.qp_max = np.max(qp_matrix)
-	props.qp_min = np.min(qp_matrix[np.nonzero(qp_matrix)])
+	qp_coo = qp_matrix.tocoo()
+	props.qp_norm = la.norm(qp_matrix, ord=np.inf)
+	# props.qp_cond = np.linalg.cond(qp_matrix)
+	# props.qp_max = np.max(qp_matrix)
+	# props.qp_min = np.min(qp_matrix[np.nonzero(qp_matrix)])
+	props.qp_max = qp_coo.data[qp_coo.data.argmax()]
+	props.qp_min = qp_coo.data[qp_coo.data.argmin()]
 
 	# properties of equality matrix
 	if keys.count("Equality"):
@@ -184,15 +190,18 @@ def analyze(path="test05_0.yml"):
 		props.equal_constr_nnz = equal_des[2]
 
 		# form the equality constraint matrix
-		equal_matrix = np.float64(np.zeros((equal_des[0], equal_des[1])))
+		equal_matrix = sp.lil_matrix((equal_des[0], equal_des[1]))
 		for i in range(equal_des[2]):
 			entry = equal_str[i].split(" ")
 			equal_matrix[np.int32(entry[0]) - 1, np.int32(entry[1]) - 1] = np.float64(entry[2])
 		
-		props.equal_constr_norm = np.linalg.norm(equal_matrix, ord=np.inf)
-		props.equal_constr_cond = np.linalg.cond(equal_matrix)
-		props.equal_constr_max = np.max(equal_matrix)
-		props.equal_constr_min = np.min(equal_matrix[np.nonzero(equal_matrix)])
+		eq_coo = equal_matrix.tocoo()
+		props.equal_constr_norm = la.norm(equal_matrix, ord=np.inf)
+		# props.equal_constr_cond = np.norm.cond(equal_matrix)
+		# props.equal_constr_max = np.max(equal_matrix)
+		# props.equal_constr_min = np.min(equal_matrix[np.nonzero(equal_matrix)])
+		props.equal_constr_max = eq_coo.data[eq_coo.data.argmax()]
+		props.equal_constr_min = eq_coo.data[eq_coo.data.argmin()]
 	
 	# properties of inequality matrix
 	if keys.count("Inequality"):
@@ -205,15 +214,18 @@ def analyze(path="test05_0.yml"):
 		props.inequal_constr_nnz = inequal_des[2]
 
 		# form the inequality constraint matrix
-		inequal_matrix = np.float64(np.zeros((inequal_des[0], inequal_des[1])))
+		inequal_matrix = sp.lil_matrix((inequal_des[0], inequal_des[1]))
 		for i in range(inequal_des[2]):
 			entry = inequal_str[i].split(" ")
 			inequal_matrix[np.int32(entry[0]) - 1, np.int32(entry[1]) - 1] = np.float64(entry[2])
 		
-		props.inequal_constr_norm = np.linalg.norm(inequal_matrix, ord=np.inf)
-		props.inequal_constr_cond = np.linalg.cond(inequal_matrix)
-		props.inequal_constr_max = np.max(inequal_matrix)
-		props.inequal_constr_min = np.min(inequal_matrix[np.nonzero(inequal_matrix)])
+		ineq_coo = inequal_matrix.tocoo()
+		props.inequal_constr_norm = la.norm(inequal_matrix, ord=np.inf)
+		# props.inequal_constr_cond = np.linalg.cond(inequal_matrix)
+		# props.inequal_constr_max = np.max(inequal_matrix)
+		# props.inequal_constr_min = np.min(inequal_matrix[np.nonzero(inequal_matrix)])
+		props.inequal_constr_max = ineq_coo.data[ineq_coo.data.argmax()]
+		props.inequal_constr_min = ineq_coo.data[ineq_coo.data.argmax()]
 
 	return props
 
@@ -227,22 +239,62 @@ def main():
 		print("analyze_qp.py <path to QPs>")
 		sys.exit(1)
 	
+	# make the directory for analysis csvs
+	csv_folder = "analysis_tables"
+	if not os.path.exists(csv_folder):
+		os.makedirs(csv_folder)
+	
 	# analyze each quadratic problems
-	QPs = []
 	for root, dirs, files in os.walk(sys.argv[1]):
-		for file in files:
-			if file.endswith(".yml") or file.endswith(".yaml"):
-				path = root + "/" + file
-				QPs.append(analyze(path))
 
-	analysis = open("All_QPs_analysis.csv", "w")
-	writer = csv.DictWriter(analysis, fieldnames=header)
-	writer.writeheader()
+		# setup for reading each file in current directory
+		QPs = []
+		root_lst = root.split("/")
+		if root == ".":
+			csv_name = csv_folder + "/smp_repo_QPs_analysis.csv"
+		else:
+			csv_name = csv_folder + "/{}_QPs_analysis.csv".format(root_lst[-1])
 
-	# write out a csv for summary of analysis
-	for qp in QPs:
-		prop_dict = qp.map_props()
-		writer.writerow(prop_dict)
+		num_dirs = len(dirs)
+		if num_dirs > 0:
+			print(str(num_dirs) + " dirs left...")
+
+		# make analysis if the folder is not analyzed before
+		if not os.path.exists(csv_name):
+			print("analyzing {} ...".format(root))
+			num_files = len([file for file in files if (file.endswith(".yml") \
+				or file.endswith(".yaml"))])
+
+			start = time.perf_counter()
+			for file in files:
+				print("{} files left...".format(num_files))
+				if file.endswith(".yml") or file.endswith(".yaml"):
+					path = root + "/"  + file
+					print("reading {} ...".format(path))
+					QPs.append(analyze(path))
+					print("done!")
+					num_files -= 1
+
+			# write out a csv for summary of analysis
+			if len(QPs) > 0:
+				with open(csv_name, "w") as analysis:
+					writer = csv.DictWriter(analysis, fieldnames=header)
+					writer.writeheader()
+
+					for qp in QPs:
+						prop_dict = qp.map_props()
+						writer.writerow(prop_dict)
+					analysis.flush()
+				
+				# time the performance for each folder and print
+				# adapted from https://stackoverflow.com/questions/27779677/how-to-format-elapsed-time-from-seconds-to-hours-minutes-seconds-and-milliseco
+				end = time.perf_counter() - start
+				hours, rem = divmod(end, 3600)
+				minutes, seconds = divmod(rem, 60)
+				print("time consumed: {:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
+				print("analyzing {} done!".format(root))
+
+		num_dirs -= 1
 
 	return 0
 
@@ -270,7 +322,7 @@ if __name__ == "__main__":
 # 		info = []
 # 		for id in s:
 # 			info.append(np.int32(id))
-# 		result = np.zeros((info[0], info[1]))
+# 		result = sp.lil_matrix((info[0], info[1]))
 
 # 		del r[0]
 

@@ -1,0 +1,10 @@
+Problem name,Problem category,Problem source,Application,Number of variables,QP dimension,QP norm (order = infty),QP condition (2-norm),QP min,QP max,QP nonzeros,Number of equality constraints,Number of inequality constraints,equality norm (order = infty),inequality norm (order = infty),equality condition number (2-norm),inequality condition number (2-nrom),equality nonzeros,inequality nonzeros,equality max,inequality max,equality min,inequality min
+alligator9,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator8,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator1,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator3,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator2,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator6,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator7,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator5,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0
+alligator4,computer graphics,libigl,Image deformation,928,928,0.9837025239812338,\,-0.2161634219191905,0.4376698686171609,8379,9,919,1.0,1.0,\,\,9,919,1.0,1.0,1.0,1.0

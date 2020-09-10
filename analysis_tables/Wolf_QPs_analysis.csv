@@ -1,0 +1,7 @@
+Problem name,Problem category,Problem source,Application,Number of variables,QP dimension,QP norm (order = infty),QP condition (2-norm),QP min,QP max,QP nonzeros,Number of equality constraints,Number of inequality constraints,equality norm (order = infty),inequality norm (order = infty),equality condition number (2-norm),inequality condition number (2-nrom),equality nonzeros,inequality nonzeros,equality max,inequality max,equality min,inequality min
+wolf_falling4,computer graphics,GAUSS Repository,Contact Simulation,2058,2058,537727.1383180403,\,-90207.69255694823,402253.5954047781,32313,\,53,\,1.2,\,\,\,159,\,0.2,\,0.2
+wolf_falling5,computer graphics,GAUSS Repository,Contact Simulation,2058,2058,537726.4807307061,\,-90207.69266319775,402253.4692967061,32313,\,67,\,1.2,\,\,\,201,\,0.2,\,0.2
+wolf_falling2,computer graphics,GAUSS Repository,Contact Simulation,2058,2058,537729.2440687174,\,-90207.6926383137,402253.4796070875,32313,\,28,\,1.2,\,\,\,84,\,0.2,\,0.2
+wolf_falling3,computer graphics,GAUSS Repository,Contact Simulation,2058,2058,537729.6357823485,\,-90207.69262906404,402253.5621799767,32313,\,41,\,1.2,\,\,\,123,\,0.2,\,0.2
+wolf_falling1,computer graphics,GAUSS Repository,Contact Simulation,2058,2058,537729.1226752786,\,-90207.69264525145,402253.49328006624,32313,\,15,\,1.2,\,\,\,45,\,0.2,\,0.2
+wolf_falling0,computer graphics,GAUSS Repository,Contact Simulation,2058,2058,537729.0888130118,\,-90207.69265205444,402253.4963992363,32313,\,7,\,1.2,\,\,\,21,\,0.2,\,0.2
