@@ -40,6 +40,7 @@ def main():
                         "../../setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb)])
 
 if __name__ == "__main__":
-    for i in range(10):
-        call(["echo", str(i)])
-    call(["ls"])
+    # for i in range(10):
+    #     call(["echo", str(i)])
+    # call(["ls"])
+    main()
