@@ -8,7 +8,7 @@ def main():
         sys.exit(1)
     
     if os.path.exists("../../setting_plots"):
-        call["rm", "-rf", "../../setting_plots"]
+        call(["rm", "-rf", "../../setting_plots"])
     os.makedirs("../../setting_plots")
     
     dataset, build_folder = sys.argv[1], sys.argv[2]
