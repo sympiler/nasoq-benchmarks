@@ -18,7 +18,7 @@ def main():
     suggested_stop_tol = map(str, [-13, -17])
     suggested_diag_perturb = [-6, -9, -12]
 
-    os.system("cd scripts/python_scripts")
+    os.chdir("scripts/python_scripts")
 
     for eps in suggested_eps:
         for max_iter in suggested_max_iter:
