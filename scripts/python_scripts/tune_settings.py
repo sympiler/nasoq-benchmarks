@@ -18,29 +18,32 @@ def main():
     suggested_stop_tol = map(str, [-13, -17])
     suggested_diag_perturb = [-6, -9, -12]
 
+    os.system("cd scripts/python_scripts")
+
     for eps in suggested_eps:
         for max_iter in suggested_max_iter:
             for stop_tol in suggested_stop_tol:
                 for diag_perturb in suggested_diag_perturb:
-                    os.system("rm -f scripts/python_scripts/*.png")
-                    os.system("rm -f scripts/python_scripts/*.csv")
+                    os.system("rm -f *.png")
+                    os.system("rm -f *.csv")
 
-                    os.makedirs("setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb))
+                    os.makedirs("../../setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb))
 
                     call(["echo", "Running NASOQ-Fixed ..."])
-                    call(["bash", "scripts/NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
+                    call(["bash", "../NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
                         "-p {} -r {} -t {}".format(diag_perturb, max_iter, stop_tol), ">", "logs/nasoq-fixed-e{}.csv".format(eps)])
 
                     call(["echo", "Running NASOQ-Tuned ..."])
-                    call(["bash","scripts/NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
+                    call(["bash","../NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
                         "-p {} -r {} -t {} -v tuned".format(diag_perturb, max_iter, stop_tol), ">", "logs/nasoq-tuned-e{}.csv".format(eps)])
 
                     call(["echo", "Running customized NASOQ ..."])
-                    call(["bash", "scripts/NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
+                    call(["bash", "../NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
                         "-p {} -r {} -t {} -v predet".format(diag_perturb, max_iter, stop_tol), ">", "logs/nasoq-custom-e{}.csv".format(eps)])
 
                     call(["python", "scripts/python_scripts/graph_generator.py", "-d",  "logs/", "-s", eps])
-                    os.system("mv *.png setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb))
+                    os.system("mv *.png ../../setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb))
+                    os.system("rm -f *.txt")
 
 if __name__ == "__main__":
     # for i in range(10):
