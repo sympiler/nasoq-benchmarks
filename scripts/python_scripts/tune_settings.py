@@ -28,7 +28,7 @@ def main():
                     call(["bash", "../NASOQ_bench.sh", "../../{}/nasoq/NASOQ-BIN".format(build_folder), dataset, eps, \
                         "-p {} -r {} -t {}".format(diag_perturb, max_iter, stop_tol), ">", "../../logs/nasoq-fixed-e{}.csv".format(eps)])
 
-                    call["echo", "Running NASOQ-Tuned ..."]
+                    call(["echo", "Running NASOQ-Tuned ..."])
                     call(["bash","../NASOQ_bench.sh", "../../{}/nasoq/NASOQ-BIN".format(build_folder), dataset, eps, \
                         "-p {} -r {} -t {} -v tuned".format(diag_perturb, max_iter, stop_tol), ">", "../../logs/nasoq-tuned-e{}.csv".format(eps)])
 
