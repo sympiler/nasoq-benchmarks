@@ -22,8 +22,8 @@ def main():
         for max_iter in suggested_max_iter:
             for stop_tol in suggested_stop_tol:
                 for diag_perturb in suggested_diag_perturb:
-                    os.system("rm -f *.png")
-                    os.system("rm -f *.csv")
+                    os.system("rm -f scripts/python_scripts/*.png")
+                    os.system("rm -f scripts/python_scripts/*.csv")
 
                     os.makedirs("setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb))
 
@@ -40,7 +40,7 @@ def main():
                         "-p {} -r {} -t {} -v predet".format(diag_perturb, max_iter, stop_tol), ">", "logs/nasoq-custom-e{}.csv".format(eps)])
 
                     call(["python", "graph_generator.py", "-d",  "logs/", "-s", eps])
-                    os.system("mv *.png setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb))
+                    os.system("mv scripts/python_scripts/*.png setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(eps, max_iter, stop_tol, diag_perturb))
 
 if __name__ == "__main__":
     # for i in range(10):
