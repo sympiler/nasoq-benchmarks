@@ -16,7 +16,6 @@ def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
         os.makedirs(path)
 
     os.system("rm -f *.png")
-    os.system("rm -f *.csv")
 
     call(["echo", "Running NASOQ-Fixed ..."])
     call(["bash", "../NASOQ_bench.sh", "../../{}/nasoq/NASOQ-BIN".format(build_folder), "../../{}".format(dataset), eps, \
@@ -33,7 +32,6 @@ def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
     call(["python", "graph_generator.py", "-d",  "../../logs/", "-s", eps])
 
     os.system("mv *.png ../../{}_setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(dataset, eps, max_iter, stop_tol, diag_perturb))
-    os.system("rm -f *.txt")
 
 def main():
     """
@@ -50,7 +48,7 @@ def main():
         # call(["rm", "-rf", "setting_plots"])
         os.makedirs(dataset + "_setting_plots")
 
-    suggested_eps = list(map(str, [-3, -6]))
+    suggested_eps = list(map(str, [-6]))
     suggested_max_iter = list(map(str, [0, 5, 10]))
     suggested_stop_tol = list(map(str, [-13, -15, -17]))
     suggested_diag_perturb = list([-6, -9, -12])
@@ -63,16 +61,22 @@ def main():
         stop_tol = suggested_stop_tol[0]
         for diag_perturb in suggested_diag_perturb:
             tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset)
+            os.system("rm -f *.csv")
+            os.system("rm -f *.txt")
         
         max_iter = suggested_max_iter[0]
         diag_perturb = suggested_diag_perturb[0]
         for stop_tol in suggested_stop_tol:
             tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset)
+            os.system("rm -f *.csv")
+            os.system("rm -f *.txt")
         
         stop_tol = suggested_stop_tol[0]
         diag_perturb = suggested_diag_perturb[0]
         for max_iter in suggested_max_iter:
             tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset)
+            os.system("rm -f *.csv")
+            os.system("rm -f *.txt")
 
 if __name__ == "__main__":
     # for i in range(10):
