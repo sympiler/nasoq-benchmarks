@@ -61,22 +61,19 @@ def main():
         stop_tol = suggested_stop_tol[0]
         for diag_perturb in suggested_diag_perturb:
             tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset)
-            os.system("rm -f *.csv")
-            os.system("rm -f *.txt")
         
         max_iter = suggested_max_iter[0]
         diag_perturb = suggested_diag_perturb[0]
         for stop_tol in suggested_stop_tol:
             tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset)
-            os.system("rm -f *.csv")
-            os.system("rm -f *.txt")
         
         stop_tol = suggested_stop_tol[0]
         diag_perturb = suggested_diag_perturb[0]
         for max_iter in suggested_max_iter:
             tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset)
-            os.system("rm -f *.csv")
-            os.system("rm -f *.txt")
+        
+        os.system("rm -f *.csv")
+        os.system("rm -f *.txt")
 
 if __name__ == "__main__":
     # for i in range(10):
