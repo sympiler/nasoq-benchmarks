@@ -18,8 +18,8 @@ def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
     os.system("rm -f *.png")
 
     call(["echo", "Running NASOQ-Fixed ..."])
-    # os.system("bash scripts/NASOQ_bench.sh {}/nasoq/NASOQ-BIN".format(build_folder) + " {} ".format(dataset) + eps + \
-    #     " -p {} -r {} -t {}".format(diag_perturb, max_iter, stop_tol) + ">" + "logs/nasoq-fixed-e{}.csv".format(eps))
+    os.system("bash scripts/NASOQ_bench.sh {}/nasoq/NASOQ-BIN".format(build_folder) + " {} ".format(dataset) + eps + \
+        " -p {} -r {} -t {}".format(diag_perturb, max_iter, stop_tol) + ">" + "logs/nasoq-fixed-e{}.csv".format(eps))
 
     call(["echo", "Running NASOQ-Tuned ..."])
     call(["bash","scripts/NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
@@ -54,7 +54,7 @@ def main():
     suggested_eps = list(map(str, [-3, -6]))
     suggested_max_iter = list(map(str, [0, 5, 10]))
     suggested_stop_tol = list(map(str, [-13, -15, -17]))
-    suggested_diag_perturb = list([-6, -9, -12])
+    suggested_diag_perturb = list(map(str, [-6, -9, -12]))
 
     # os.chdir("scripts/python_scripts")
 
