@@ -31,11 +31,9 @@ def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
 
     os.chdir("scripts/python_scripts")
     call(["python", "graph_generator.py", "-d",  "../../logs/", "-s", eps])
-    os.chdir("../..")
-
-    os.system("rm -f scripts/python_scripts/*.txt")
-
+    os.system("rm -f *.txt")
     os.system("mv *.png {}_setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(dataset, eps, max_iter, stop_tol, diag_perturb))
+    os.chdir("../..")
 
 def main():
     """
