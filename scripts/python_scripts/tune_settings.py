@@ -18,8 +18,8 @@ def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
     os.system("rm -f *.png")
 
     call(["echo", "Running NASOQ-Fixed ..."])
-    os.system("bash scripts/NASOQ_bench.sh {}/nasoq/NASOQ-BIN".format(build_folder) + " {} ".format(dataset) + eps + \
-        " -p {} -r {} -t {}".format(diag_perturb, max_iter, stop_tol) + ">" + "logs/nasoq-fixed-e{}.csv".format(eps))
+    # os.system("bash scripts/NASOQ_bench.sh {}/nasoq/NASOQ-BIN".format(build_folder) + " {} ".format(dataset) + eps + \
+    #     " -p {} -r {} -t {}".format(diag_perturb, max_iter, stop_tol) + ">" + "logs/nasoq-fixed-e{}.csv".format(eps))
 
     call(["echo", "Running NASOQ-Tuned ..."])
     call(["bash","scripts/NASOQ_bench.sh", "{}/nasoq/NASOQ-BIN".format(build_folder), "{}".format(dataset), eps, \
