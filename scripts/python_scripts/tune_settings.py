@@ -33,6 +33,8 @@ def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
     call(["python", "graph_generator.py", "-d",  "../../logs/", "-s", eps])
     os.chdir("../..")
 
+    os.system("rm -f scripts/python_scripts/*.txt")
+
     os.system("mv *.png {}_setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(dataset, eps, max_iter, stop_tol, diag_perturb))
 
 def main():
@@ -73,9 +75,6 @@ def main():
         diag_perturb = suggested_diag_perturb[0]
         for max_iter in suggested_max_iter:
             tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset)
-        
-        os.system("rm -f *.csv")
-        os.system("rm -f *.txt")
 
 if __name__ == "__main__":
     # for i in range(10):
