@@ -52,7 +52,7 @@ def main():
         # call(["rm", "-rf", "setting_plots"])
         os.makedirs(dataset + "_setting_plots")
 
-    suggested_eps = list(map(str, [-6]))
+    suggested_eps = list(map(str, [-3, -6]))
     suggested_max_iter = list(map(str, [0, 5, 10]))
     suggested_stop_tol = list(map(str, [-13, -15, -17]))
     suggested_diag_perturb = list([-6, -9, -12])
