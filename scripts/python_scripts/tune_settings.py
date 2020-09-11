@@ -7,7 +7,7 @@ def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
     draw the plotting based on the tuned settings
     """
 
-    path = "setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(dataset, eps, max_iter, stop_tol, diag_perturb)
+    path = "{}_setting_plots/eps{}_max_iter{}_stop_tol{}_diag_perturb{}".format(dataset, eps, max_iter, stop_tol, diag_perturb)
 
     if os.path.exists(path) and len(os.listdir(path)):
         return
