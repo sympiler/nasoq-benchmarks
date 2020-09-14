@@ -1,0 +1,4 @@
+Problem name,Problem category,Problem source,Application,Number of variables,QP dimension,QP norm (order = infty),QP condition (2-norm),QP min,QP max,QP nonzeros,Number of equality constraints,Number of inequality constraints,equality norm (order = infty),inequality norm (order = infty),equality condition number (2-norm),inequality condition number (2-nrom),equality nonzeros,inequality nonzeros,equality max,inequality max,equality min,inequality min
+Bar2k_floor3,computer graphics,GAUSS Repository,Contact Simulation,1317,1317,99.8614819533629,\,-9.440853027955262,25.11452384032519,20517,\,219,\,1.2,\,\,\,657,\,0.2,\,0.2
+Bar2k_floor2,computer graphics,GAUSS Repository,Contact Simulation,1317,1317,99.9865054741953,\,-9.45173226344195,25.16057081793173,20517,\,219,\,1.2,\,\,\,657,\,0.2,\,0.2
+Bar2k_floor4,computer graphics,GAUSS Repository,Contact Simulation,1317,1317,99.86843618700594,\,-9.442372943636661,25.11998450530024,20517,\,219,\,1.2,\,\,\,657,\,0.2,\,0.2

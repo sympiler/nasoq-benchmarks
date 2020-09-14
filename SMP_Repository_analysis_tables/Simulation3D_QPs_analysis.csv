@@ -1,0 +1,7 @@
+Problem name,Problem category,Problem source,Application,Number of variables,QP dimension,QP norm (order = infty),QP condition (2-norm),QP min,QP max,QP nonzeros,Number of equality constraints,Number of inequality constraints,equality norm (order = infty),inequality norm (order = infty),equality condition number (2-norm),inequality condition number (2-nrom),equality nonzeros,inequality nonzeros,equality max,inequality max,equality min,inequality min
+Ph178.mtx,computer graphics,NASOQ,Contact Simulation,114309,114309,3628.7775399999996,\,-507.058,823.625,2206404,\,14191,\,2.70593,\,\,\,28382,\,1.29963,\,1.29963
+Ph10.mtx,computer graphics,NASOQ,Contact Simulation,114309,114309,99.5632463,\,-13.3322,34.0101,2206404,\,881,\,1.4183409999999999,\,\,\,1762,\,0.963808,\,0.963808
+Ph176.mtx,computer graphics,NASOQ,Contact Simulation,114309,114309,967.182808,\,-134.609,260.912,2206404,\,7546,\,1.39336,\,\,\,15092,\,1.0,\,1.0
+Ph9.mtx,computer graphics,NASOQ,Contact Simulation,114309,114309,98.38641890000001,\,-12.7842,33.5434,2206404,\,881,\,1.4040409999999999,\,\,\,1762,\,0.942283,\,0.942283
+Ph8.mtx,computer graphics,NASOQ,Contact Simulation,114309,114309,99.77026486,\,-13.5695,35.2794,2206404,\,881,\,1.362758,\,\,\,1762,\,0.923439,\,0.923439
+Ph177.mtx,computer graphics,NASOQ,Contact Simulation,114309,114309,1714.1487993000003,\,-264.052,415.901,2206404,\,14155,\,2.6928099999999997,\,\,\,28310,\,1.29697,\,1.29697
