@@ -1,4 +1,0 @@
-Problem name,Problem category,Problem source,Application,Number of variables,QP dimension,QP norm (order = infty),QP condition (2-norm),QP min,QP max,QP nonzeros,Number of equality constraints,Number of inequality constraints,equality norm (order = infty),inequality norm (order = infty),equality condition number (2-norm),inequality condition number (2-nrom),equality nonzeros,inequality nonzeros,equality max,inequality max,equality min,inequality min
-lion1_s,computer graphics,libigl,Image deformation,8356,8356,174.03053689349548,\,-86.88452801760417,115.86882588549304,86831,11,8345,1.0,1.0,\,\,11,8345,1.0,1.0,1.0,1.0
-lion3_s,computer graphics,libigl,Image deformation,8356,8356,174.03053689349548,\,-86.88452801760417,115.86882588549304,86831,11,8345,1.0,1.0,\,\,11,8345,1.0,1.0,1.0,1.0
-lion2_s,computer graphics,libigl,Image deformation,8356,8356,174.03053689349548,\,-86.88452801760417,115.86882588549304,86831,11,8345,1.0,1.0,\,\,11,8345,1.0,1.0,1.0,1.0

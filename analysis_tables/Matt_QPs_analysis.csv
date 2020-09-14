@@ -1,4 +1,0 @@
-Problem name,Problem category,Problem source,Application,Number of variables,QP dimension,QP norm (order = infty),QP condition (2-norm),QP min,QP max,QP nonzeros,Number of equality constraints,Number of inequality constraints,equality norm (order = infty),inequality norm (order = infty),equality condition number (2-norm),inequality condition number (2-nrom),equality nonzeros,inequality nonzeros,equality max,inequality max,equality min,inequality min
-matt_qp1,computer graphics,Contact simulator,Contact Simulation,234,234,110.3601209,\,-15.8039,97.1686,1182,\,30,\,1.5387606999999999,\,\,\,164,\,0.995541,\,0.995541
-matt_qp3,computer graphics,Contact simulator,Contact Simulation,5085,5085,51.737273,\,-6.80852,31.79,32454,\,72,\,1.5665816,\,\,\,355,\,1.0,\,1.0
-matt_qp2,computer graphics,Contact simulator,Contact Simulation,5085,5085,51.737273,\,-6.80852,31.79,32454,\,37,\,1.5652614999999999,\,\,\,184,\,1.0,\,1.0
