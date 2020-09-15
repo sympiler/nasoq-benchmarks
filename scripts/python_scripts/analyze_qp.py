@@ -130,7 +130,7 @@ class properties:
 		return result
 
 #TODO: I'd suggest rename the following to read_SMP. We can add this to the SMP repo.
-def analyze(path="test05_0.yml"):
+def read_SMP(path="test05_0.yml"):
 	props = properties()
 	with open(path, 'r') as stream:
 		data_loaded = yaml.safe_load(stream)
@@ -236,12 +236,12 @@ def main():
 	analyze each of them
 	"""
 	# parse the variables
-	if len(sys.argv) != 2:
-		print("analyze_qp.py <path to QPs>")
+	if len(sys.argv) != 3:
+		print("analyze_qp.py <path to QPs> <ifMerge>")
 		sys.exit(1)
 	
 	# make the directory for analysis csvs
-	csv_folder = "analysis_tables"
+	csv_folder = sys.argv[1] + "_analysis_tables"
 	if not os.path.exists(csv_folder):
 		os.makedirs(csv_folder)
 	
@@ -273,7 +273,7 @@ def main():
 				if file.endswith(".yml") or file.endswith(".yaml"):
 					path = root + "/"  + file
 					print("reading {} ...".format(path))
-					QPs.append(analyze(path))
+					QPs.append(read_SMP(path))
 					print("done!")
 					num_files -= 1
 
@@ -298,6 +298,28 @@ def main():
 
 		num_dirs -= 1
 #TODO: that would be nice if you have an option to concatenate all csv files into a big one for the whole repo.
+	if bool(sys.argv[2]):
+		print("begin to merge...")
+		csvs = os.listdir(csv_folder)
+
+		# with open(csv_folder + "/merge.csv", "w") as fout:
+		# 	i = 0
+		# 	while i < len(header):
+		# 		fout.write(header[i])
+		# 		if i < len(header) - 1:
+		# 			fout.write(",")
+		# 		i += 1
+		# 	# now the rest:    
+		# 	for csv_name in csvs:
+		# 		f = open(csv_folder + "/" + csv_name, "r")
+		# 		# f.nextline() # skip the header
+		# 		for line in f:
+		# 			fout.write(line)
+		# 		f.close()
+		combined_csv = pd.concat([pd.read_csv(csv_folder + "/" + f) for f in csvs if os.stat(csv_folder + "/" + f).st_size])
+		combined_csv.to_csv(csv_folder + "/merged_csvs.csv", index=True)
+		print("all csvs are merged")
+
 	return 0
 
 if __name__ == "__main__":
