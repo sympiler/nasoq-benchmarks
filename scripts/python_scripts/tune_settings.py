@@ -2,6 +2,8 @@ from subprocess import call
 import sys
 import os
 
+#FIXME: Question, does running a binary from python have any side effect? Have you tried comparing
+# the timing from bash vs this python file? You may try a few QPs to make sure the timing is the same.
 def tune(eps, diag_perturb, max_iter, stop_tol, build_folder, dataset):
     """
     draw the plotting based on the tuned settings
@@ -54,6 +56,8 @@ def main():
     if not os.path.exists(dataset + "_setting_plots"):
         # call(["rm", "-rf", "setting_plots"])
         os.makedirs(dataset + "_setting_plots")
+# TODO: make sure you have tuned for more parameters. For example, max_iter should 0, 1,2,3,4,5,10
+ # or diag_pert should be -6,-7,-8,-9,-10, ...
 
     suggested_eps = list(map(str, [-3, -6]))
     suggested_max_iter = list(map(str, [0, 5, 10]))

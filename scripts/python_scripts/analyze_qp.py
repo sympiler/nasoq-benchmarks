@@ -129,6 +129,7 @@ class properties:
 
 		return result
 
+#TODO: I'd suggest rename the following to read_SMP. We can add this to the SMP repo.
 def analyze(path="test05_0.yml"):
 	props = properties()
 	with open(path, 'r') as stream:
@@ -264,7 +265,8 @@ def main():
 			print("analyzing {} ...".format(root))
 			num_files = len([file for file in files if (file.endswith(".yml") \
 				or file.endswith(".yaml"))])
-
+			#TODO: why do you need to time? We are not interested in this timing. Remove it or explain it to me in slack
+			# why you need it.
 			start = time.perf_counter()
 			for file in files:
 				print("{} files left...".format(num_files))
@@ -295,7 +297,7 @@ def main():
 				print("analyzing {} done!".format(root))
 
 		num_dirs -= 1
-
+#TODO: that would be nice if you have an option to concatenate all csv files into a big one for the whole repo.
 	return 0
 
 if __name__ == "__main__":
