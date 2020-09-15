@@ -298,6 +298,7 @@ def main():
 
 		num_dirs -= 1
 #TODO: that would be nice if you have an option to concatenate all csv files into a big one for the whole repo.
+	# merge all created csvs into one
 	if bool(sys.argv[2]):
 		print("begin to merge...")
 		csvs = os.listdir(csv_folder)
