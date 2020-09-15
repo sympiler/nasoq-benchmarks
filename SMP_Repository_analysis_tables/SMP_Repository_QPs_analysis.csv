@@ -1,0 +1,3 @@
+Problem name,Problem category,Problem source,Application,Number of variables,QP dimension,QP norm (order = infty),QP condition (2-norm),QP min,QP max,QP nonzeros,Number of equality constraints,Number of inequality constraints,equality norm (order = infty),inequality norm (order = infty),equality condition number (2-norm),inequality condition number (2-nrom),equality nonzeros,inequality nonzeros,equality max,inequality max,equality min,inequality min
+test05_0,robotics,MPC Library,Model Predictive Control,185,185,1.0,\,0.01,1.0,185,125,60,7.999999880000001,1.0,\,\,2196,1890,1.0,0.818731,-1.0,0.818731
+matt_qp1,computer graphics,Contact simulator,Contact Simulation,234,234,110.3601209,\,-15.8039,97.1686,1182,\,30,\,1.5387606999999999,\,\,\,164,\,0.995541,\,0.995541
