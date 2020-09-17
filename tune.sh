@@ -28,63 +28,63 @@ do
     for max_iter in $max_iter_lst # 48 csvs in total
     do
         echo "running nasoq-fixed for max_iter = ${max_iter}"
-        if [ ! -f tune_csvs/max_iter/nasoq-fixed-eps${eps}_max_iter${max_iter}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/max_iter/nasoq-fixed-eps${eps}_max_iter${max_iter}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${max_iter} -t ${default_stop_tol}" \
-            > tune_csvs/max_iter/nasoq-fixed-eps${eps}_max_iter${max_iter}.csv
+            > ${DATASET}_tune_csvs/max_iter/nasoq-fixed-eps${eps}_max_iter${max_iter}.csv
         fi
 
         echo "running nasoq-tuned for max_iter = ${max_iter}"
-        if [ ! -f tune_csvs/max_iter/nasoq-tuned-eps${eps}_max_iter${max_iter}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/max_iter/nasoq-tuned-eps${eps}_max_iter${max_iter}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${max_iter} -t ${default_stop_tol} -v tuned" \
-            > tune_csvs/max_iter/nasoq-tuned-eps${eps}_max_iter${max_iter}.csv
+            > ${DATASET}_tune_csvs/max_iter/nasoq-tuned-eps${eps}_max_iter${max_iter}.csv
         fi
 
         echo "running nasoq-custom for max_iter = ${max_iter}"
-        if [ ! -f tune_csvs/max_iter/nasoq-custom-eps${eps}_max_iter${max_iter}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/max_iter/nasoq-custom-eps${eps}_max_iter${max_iter}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${max_iter} -t ${default_stop_tol} -v predet" \
-            > tune_csvs/max_iter/nasoq-custom-eps${eps}_max_iter${max_iter}.csv
+            > ${DATASET}_tune_csvs/max_iter/nasoq-custom-eps${eps}_max_iter${max_iter}.csv
         fi
     done
 
     for stop_tol in $stop_tol_lstt # 24 csvs in total
     do
         echo "running nasoq-fixed for stop_tol = ${stop_tol_lst}"
-        if [ ! -f tune_csvs/stop_tol/nasoq-fixed-eps${eps}_stop_tol${stop_tol}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/stop_tol/nasoq-fixed-eps${eps}_stop_tol${stop_tol}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${default_max_iter} -t ${stop_tol}" \
-            > tune_csvs/stop_tol/nasoq-fixed-eps${eps}_stop_tol${stop_tol}.csv
+            > ${DATASET}_tune_csvs/stop_tol/nasoq-fixed-eps${eps}_stop_tol${stop_tol}.csv
         fi
 
         echo "running nasoq-tuned for stop_tol = ${stop_tol_lst}"
-        if [ ! -f tune_csvs/stop_tol/nasoq-tuned-eps${eps}_stop_tol${stop_tol}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/stop_tol/nasoq-tuned-eps${eps}_stop_tol${stop_tol}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${default_max_iter} -t ${stop_tol} -v tuned" \
-            > tune_csvs/stop_tol/nasoq-tuned-eps${eps}_stop_tol${stop_tol}.csv
+            > ${DATASET}_tune_csvs/stop_tol/nasoq-tuned-eps${eps}_stop_tol${stop_tol}.csv
         fi
 
         echo "running nasoq-custom for stop_tol = ${stop_tol_lst}"
-        if [ ! -f tune_csvs/stop_tol/nasoq-custom-eps${eps}_stop_tol${stop_tol}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/stop_tol/nasoq-custom-eps${eps}_stop_tol${stop_tol}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${default_max_iter} -t ${stop_tol} -v predet" \
-            > tune_csvs/stop_tol/nasoq-custom-eps${eps}_stop_tol${stop_tol}.csv
+            > ${DATASET}_tune_csvs/stop_tol/nasoq-custom-eps${eps}_stop_tol${stop_tol}.csv
         fi
     done
 
     for diag_perturb in $diag_perturb_lst # 42 csvs in total
     do
         echo "running nasoq-fixed for diag_perturb = ${diag_perturb_lst}"
-        if [ ! -f tune_csvs/diag_perturb/nasoq-fixed-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/diag_perturb/nasoq-fixed-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${diag_perturb} -r ${default_max_iter} -t ${default_stop_tol}" \
-            > tune_csvs/diag_perturb/nasoq-fixed-eps${eps}_diag_perturb${diag_perturb}.csv
+            > ${DATASET}_tune_csvs/diag_perturb/nasoq-fixed-eps${eps}_diag_perturb${diag_perturb}.csv
         fi
 
         echo "running nasoq-tuned for diag_perturb = ${diag_perturb_lst}"
-        if [ ! -f tune_csvs/diag_perturb/nasoq-tuned-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/diag_perturb/nasoq-tuned-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${diag_perturb} -r ${default_max_iter} -t ${default_stop_tol} -v tuned" \
-            > tune_csvs/diag_perturb/nasoq-tuned-eps${eps}_diag_perturb${diag_perturb}.csv
+            > ${DATASET}_tune_csvs/diag_perturb/nasoq-tuned-eps${eps}_diag_perturb${diag_perturb}.csv
         fi
 
         echo "running nasoq-custom for diag_perturb = ${diag_perturb_lst}"
-        if [ ! -f tune_csvs/diag_perturb/nasoq-custom-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
+        if [ ! -f ${DATASET}_tune_csvs/diag_perturb/nasoq-custom-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${diag_perturb} -r ${default_max_iter} -t ${default_stop_tol} -v predet" \
-            > tune_csvs/diag_perturb/nasoq-custom-eps${eps}_diag_perturb${diag_perturb}.csv
+            > ${DATASET}_tune_csvs/diag_perturb/nasoq-custom-eps${eps}_diag_perturb${diag_perturb}.csv
         fi
     done
 done
