@@ -23,7 +23,8 @@ mkdir -p tune_csvs/max_iter
 mkdir -p tune_csvs/stop_tol
 mkdir -p tune_csvs/diag_perturb
 
-for eps in $eps_lst do
+for eps in $eps_lst
+do
     for max_iter in $max_iter_lst do
         if [ ! -f tune_csvs/max_iter/nasoq-fixed-eps${eps}_max_iter${max_iter}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${max_iter} -t ${default_stop_tol}" \
