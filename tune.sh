@@ -25,7 +25,8 @@ mkdir -p tune_csvs/diag_perturb
 
 for eps in $eps_lst
 do
-    for max_iter in $max_iter_lst do
+    for max_iter in $max_iter_lst
+    do
         if [ ! -f tune_csvs/max_iter/nasoq-fixed-eps${eps}_max_iter${max_iter}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${max_iter} -t ${default_stop_tol}" \
             > tune_csvs/max_iter/nasoq-fixed-eps${eps}_max_iter${max_iter}.csv
@@ -42,7 +43,8 @@ do
         fi
     done
 
-    for stop_tol in $stop_tol_lst do
+    for stop_tol in $stop_tol_lst
+    do
         if [ ! -f tune_csvs/stop_tol/nasoq-fixed-eps${eps}_stop_tol${stop_tol}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${default_diag_perturb} -r ${default_max_iter} -t ${stop_tol}" \
             > tune_csvs/stop_tol/nasoq-fixed-eps${eps}_stop_tol${stop_tol}.csv
@@ -59,7 +61,8 @@ do
         fi
     done
 
-    for diag_perturb in $diag_perturb_lst do
+    for diag_perturb in $diag_perturb_lst
+    do
         if [ ! -f tune_csvs/diag_perturb/nasoq-fixed-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${diag_perturb} -r ${default_max_iter} -t ${default_stop_tol}" \
             > tune_csvs/diag_perturb/nasoq-fixed-eps${eps}_diag_perturb${diag_perturb}.csv
