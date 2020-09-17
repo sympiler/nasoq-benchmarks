@@ -46,7 +46,7 @@ do
         fi
     done
 
-    for stop_tol in $stop_tol_lstt # 24 csvs in total
+    for stop_tol in $stop_tol # 24 csvs in total
     do
         echo "running nasoq-fixed for stop_tol = ${stop_tol}, eps = ${eps}"
         if [ ! -f ${DATASET}_tune_csvs/stop_tol/nasoq-fixed-eps${eps}_stop_tol${stop_tol}.csv ]; then
@@ -67,7 +67,7 @@ do
         fi
     done
 
-    for diag_perturb in $diag_perturb_lst # 42 csvs in total
+    for diag_perturb in $diag_perturb # 42 csvs in total
     do
         echo "running nasoq-fixed for diag_perturb = ${diag_perturb}, eps = ${eps}"
         if [ ! -f ${DATASET}_tune_csvs/diag_perturb/nasoq-fixed-eps${eps}_diag_perturb${diag_perturb}.csv ]; then
