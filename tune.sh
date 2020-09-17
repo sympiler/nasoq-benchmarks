@@ -18,10 +18,10 @@ default_max_iter=0
 default_stop_tol=-13
 default_diag_perturb=-6
 
-mkdir -p tune_csvs
-mkdir -p tune_csvs/max_iter
-mkdir -p tune_csvs/stop_tol
-mkdir -p tune_csvs/diag_perturb
+mkdir -p ${DATASET}_tune_csvs
+mkdir -p ${DATASET}_tune_csvs/max_iter
+mkdir -p ${DATASET}_tune_csvs/stop_tol
+mkdir -p ${DATASET}_tune_csvs/diag_perturb
 
 for eps in $eps_lst
 do
