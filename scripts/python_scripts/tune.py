@@ -4,10 +4,13 @@ import csv
 import os
 
 # the name of the folder and subfolder for output
-dir = "test_smp_tune_csvs/"
-des_dir = "test_smp_tune_plots_data/"
+# dir = "test_smp_tune_csvs/"
+# des_dir = "test_smp_tune_plots_data/"
 
-# the max timming for success
+dir = "SMP_Repository_tune_csvs/"
+des_dir = "SMP_Repository_tune_plots_data/"
+
+# the max timing for success
 MAX_VAL = 1600
 
 # run_time for failed cases
@@ -31,7 +34,8 @@ eps_realval_lst = [1e-3, 1e-6]
 
 # the header of the output csv for failure rate and speedup ("mode" is just a placeholder)
 header_failure_rate = ["tool", "eps", "failure rate * 100", "mode"]
-header_speedup = ["tool", "eps", "gmean", "speedup", "mode"]
+header_speedup = ["tool", "eps", "gmean (ignore failure)", "speedup (ignore failure)", \
+    "gmean (with failure)", "speedup (with failure)", "mode"]
 
 def compute_failure_rates(mode="max_iter"):
     """
@@ -141,7 +145,7 @@ def compute_speedup(mode):
     # the subfolder to store the output of this function
     second_des_dir = "speedup/"
 
-    def geom_mean(run_times, shift=10.):
+    def geom_mean_ignore_failure(run_times, shift=10.):
         """Compute the shifted geometric mean using formula from
         http://plato.asu.edu/ftp/shgeom.html
         NB. Use logarithms to avoid numeric overflows
@@ -163,6 +167,13 @@ def compute_speedup(mode):
         
         # return the geometric mean
         return np.exp(sum_time / length_time) - shift
+    
+    def geom_mean_with_failure(run_times, shift=10.):
+        """Compute the shifted geometric mean using formula from
+        http://plato.asu.edu/ftp/shgeom.html
+        NB. Use logarithms to avoid numeric overflows
+        """
+        return np.exp(np.sum(np.log(np.maximum(1, run_times + shift))/len(run_times))) - shift
     
     def write_csv(tool, eps, writer, csv_name, mode):
         """
@@ -200,13 +211,16 @@ def compute_speedup(mode):
             if statuses[i] not in SOLUTION_PRESENT:
                 run_times[i] = MAX_TIMING
         # compute the geometric mean
-        gmean = geom_mean(run_times, 1)
+        gmean_ignore_failure = geom_mean_ignore_failure(run_times, 1)
+        gmean_with_failure = geom_mean_with_failure(run_times, 1)
 
         # speedup for the reference method (nasoq-fixed)
         if tool == "nasoq-fixed":
             # if nasoq-fixed failed on all given QPs under the circumstance, speedup = 0
-            if gmean == 0.0: speedup = 0
-            else: speedup = 1
+            if gmean_ignore_failure == 0.0: speedup_ignore_failure = 0
+            else: speedup_ignore_failure = 1
+
+            speedup_with_failure = 1
         # compute speedup for other tools
         # read out the gmean of nasoq-fixed at first since nasoq-fixed is the reference
         # and its gmean will be used to compute speedup
@@ -219,24 +233,29 @@ def compute_speedup(mode):
             # compute the speedup for other methods
             nf_param = nf_data[mode].values
             nf_gmean_index = np.where(nf_param == param)[0][0]
-            nf_gmean = nf_data["gmean"].values[nf_gmean_index]
+            nf_gmean_ignore_failure = nf_data["gmean (ignore failure)"].values[nf_gmean_index]
+            nf_gmean_with_failure = nf_data["gmean (with failure)"].values[nf_gmean_index]
+
+            speedup_with_failure = nf_gmean_with_failure / gmean_with_failure
 
             # if the solver fails on all cases, let its speed be infinity
             # since speedup_of_this solver = gmean_ref / gmean_this_solver
-            if gmean == 0.0:
-                speedup = np.inf
+            if gmean_ignore_failure == 0.0:
+                speedup_ignore_failure = np.inf
             # if this solver succeeds on some cases but nasoq-fixed fails all,
             # let the speedup be 0 (not be able to use nasoq-fixed as reference
             # for this tuned parameter value)
-            elif nf_gmean == 0.0:
-                speedup = 0
+            elif nf_gmean_ignore_failure == 0.0:
+                speedup_ignore_failure = 0
             # normal case for speedup computation (a ratio between gmean_ref and gmean_this_tool)
             else:
-                speedup = nf_gmean / gmean
+                speedup_ignore_failure = nf_gmean_ignore_failure / gmean_ignore_failure
 
          # write the geometric mean and speedup for the given tuned parameter
          # under given eps into corresponding csv
-        row = {header_speedup[0]: tool, header_speedup[1]: eps, header_speedup[2]: gmean, header_speedup[3]: speedup, mode: param}
+        row = {header_speedup[0]: tool, header_speedup[1]: eps, header_speedup[2]: gmean_ignore_failure, \
+            header_speedup[3]: speedup_ignore_failure, header_speedup[4]: gmean_with_failure, \
+                header_speedup[5]: speedup_with_failure, mode: param}
         writer.writerow(row)
 
     # generate the csv files to write (for the given tested parameter)
