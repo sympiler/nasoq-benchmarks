@@ -4,10 +4,10 @@ import os
 import matplotlib.pyplot as plt
 from collections import defaultdict 
 
-dir_params = "test_smp_tune_csvs/"
-dir_analysis_data = "test_smp_analysis_tables/merged_csvs.csv"
+dir_params = "SMP_Repository_tune_csvs/"
+dir_analysis_data = "SMP_Repository_analysis_tables/merged_csvs.csv"
 
-plot_path = "test_smp_metrics_plots/"
+plot_path = "SMP_Repository_metrics_plots/"
 
 # the status of successful cases
 OPTIMAL = 1
@@ -42,11 +42,11 @@ eps_realval_lst = sorted([1e-3, 1e-6])
 # bin of data based on the value of metrics in SMP_Repository
 norm_bin = [(0, 5), (5, 10), (10, 100), (100, 500), (500, 1500), (1500, 2500), \
     (2500, 4500), (4500, 10000), (10000, 100000), (100000, np.inf)]
-nnz_bin = [(0, 100), (100, 500), (500, 1000), (1000, 5000), (10000, 20000), \
+nnz_bin = [(0, 100), (100, 500), (500, 1000), (1000, 5000), (5000, 10000), (10000, 20000), \
     (20000, 30000), (30000, 45000), (45000, 60000), (60000, 150000), (150000, np.inf)]
 constrs_bin = [(0, 5), (5, 10), (10, 50), (50, 100), (100, 200), (200, 500), (500, 750), \
     (750, 1000), (1000, 1500), (1500, 2000), (2000, 5000), (5000, 10000), (10000, 20000), (20000, np.inf)]
-numerical_range_bin = [(0, 1.5), (1.5, 2), (2, 2,5), (2.5, 3), (3, 5), (5, 10), (10, 100), (100, np.inf)]
+numerical_range_bin = [(0, 1.5), (1.5, 2.0), (2.0, 2.5), (2.5, 3.0), (3.0, 5.0), (5.0, 10.0), (10.0, 100.0), (100.0, np.inf)]
 
 # geometric mean of reference tool (nasoq-fixed here)
 ref_gmens_with = {}
@@ -186,7 +186,7 @@ def plot_speedup(param="diag_perturb", tool="nasoq-fixed", eps=-3):
 
     # list all csv files and make graphs
     perfcsv_for_param = os.listdir(dir_params + param)
-    fig, axs = plt.subplots(nrows=4, ncols=2, figsize=(15, 15))
+    fig, axs = plt.subplots(nrows=4, ncols=2, figsize=(20, 20))
 
     for csv_name in perfcsv_for_param:
         # find the specified csv
@@ -224,8 +224,8 @@ def plot_speedup(param="diag_perturb", tool="nasoq-fixed", eps=-3):
             eq = np.int32(eq)
             constr_lst = ineq + eq
 
-            qp_min = df_analysis["QP min"].values
-            qp_max = df_analysis["QP max"].values
+            qp_min = df_merged["QP min"].values
+            qp_max = df_merged["QP max"].values
             num_range_lst = np.abs(qp_max / qp_min)
 
             # build dict for statistics of each bin
@@ -323,10 +323,6 @@ def plot_speedup(param="diag_perturb", tool="nasoq-fixed", eps=-3):
             plt.sca(axs[3, 0]); plt.xticks(np.arange(len(num_range_array_without)), sorted(list(num_range_stat_without.keys()), key=lambda t: t[0]))
             plt.sca(axs[3, 1]); plt.xticks(np.arange(len(num_range_array_with)), sorted(list(num_range_stat_with.keys()), key=lambda t: t[0]))
 
-            
-            print("csv name: {}".format(csv_name), norm_array_with)
-            print("csv name: {}".format(csv_name), norm_array_without)
-
     plt.tight_layout()
     plt.savefig(plot_path + "speedup/" + "speedup_{}_{}_eps{}.png".format(tool, param, eps))
 
@@ -347,7 +343,7 @@ def plot_failure_rate(param="diag_perturb", tool="nasoq-custom", eps=-6):
         lst = stop_tol_lst
 
     perfcsv_for_param = os.listdir(dir_params + param)
-    fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(15, 15))
+    fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(20, 20))
 
     for csv_name in perfcsv_for_param:
         # find the specified csv
@@ -379,8 +375,8 @@ def plot_failure_rate(param="diag_perturb", tool="nasoq-custom", eps=-6):
             eq = np.int32(eq)
             constr_lst = ineq + eq
 
-            qp_min = df_analysis["QP min"].values
-            qp_max = df_analysis["QP max"].values
+            qp_min = df_merged["QP min"].values
+            qp_max = df_merged["QP max"].values
             num_range_lst = np.abs(qp_max / qp_min)
 
             # store the statistics needed (status for each qp at each metric) into proper bins
@@ -389,6 +385,9 @@ def plot_failure_rate(param="diag_perturb", tool="nasoq-custom", eps=-6):
             
             # store the information needed (status for each qp at each metric) into proper bins
             i = 0
+            # print(len(status_lst))
+            # print(len(norm_lst))
+            # print(len(num_range_lst))
             while i < len(df_merged):
                 norm_stat[find_correct_bin(norm_bin, norm_lst[i])].append(status_lst[i])
                 nnz_stat[find_correct_bin(nnz_bin, nnz_lst[i])].append(status_lst[i])
@@ -396,6 +395,11 @@ def plot_failure_rate(param="diag_perturb", tool="nasoq-custom", eps=-6):
                 num_range_stat[find_correct_bin(numerical_range_bin, num_range_lst[i])].append(status_lst[i])
 
                 i += 1
+            
+            # l = 0
+            # for bin_t in numerical_range_bin:
+            #     l += len(num_range_stat[bin_t])
+            # print(l)
             
             # compute the failure rate in each bin
             norm_frate_stat = compute_frate_by_bin(norm_stat)
