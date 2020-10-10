@@ -139,14 +139,14 @@ def main():
         os.makedirs(des_dir + "failure_rates/")
         os.makedirs(des_dir + "speedup/")
 
-    # for eps in eps_lst:
-    #     for param in param_lst:
-    #         plot_failure_rate(eps, param)
-    #         plot_speedup(eps, param)
+    for eps in eps_lst:
+        for param in param_lst:
+            plot_failure_rate(eps, param)
+            plot_speedup(eps, param)
 
-    for param in param_lst:
-        plot_failure_rate(-3, param)
-        plot_speedup(-3, param)
+    # for param in param_lst:
+    #     plot_failure_rate(-3, param)
+    #     plot_speedup(-3, param)
 
 if __name__ == "__main__":
     main()

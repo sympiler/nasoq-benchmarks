@@ -317,7 +317,7 @@ def main():
 		# 		for line in f:
 		# 			fout.write(line)
 		# 		f.close()
-		combined_csv = pd.concat([pd.read_csv(csv_folder + "/" + f) for f in csvs if os.stat(csv_folder + "/" + f).st_size])
+		combined_csv = pd.concat([pd.read_csv(csv_folder + "/" + f) for f in csvs if os.stat(csv_folder + "/" + f).st_size and f.endswith(".csv")])
 		combined_csv.to_csv(csv_folder + "/merged_csvs.csv", index=True)
 		print("all csvs are merged")
 

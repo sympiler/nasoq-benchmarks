@@ -186,7 +186,7 @@ def plot_speedup(param="diag_perturb", tool="nasoq-fixed", eps=-3):
 
     # list all csv files and make graphs
     perfcsv_for_param = os.listdir(dir_params + param)
-    fig, axs = plt.subplots(nrows=4, ncols=2, figsize=(20, 20))
+    fig, axs = plt.subplots(nrows=4, ncols=2, figsize=(15, 15))
 
     for csv_name in perfcsv_for_param:
         # find the specified csv
@@ -313,15 +313,15 @@ def plot_speedup(param="diag_perturb", tool="nasoq-fixed", eps=-3):
             axs[2, 0].set(xlabel="num of constraints bin", ylabel="speedup"); axs[2, 1].set(xlabel="num of constraints bin", ylabel="speedup");
             axs[3, 0].set(xlabel="numerical range bin", ylabel="speedup"); axs[3, 1].set(xlabel="numerical range bin", ylabel="speedup");
 
-            plt.sca(axs[0, 0]); plt.xticks(np.arange(len(norm_array_without)), sorted(list(norm_stat_without.keys()), key=lambda t: t[0]))
-            plt.sca(axs[0, 1]); plt.xticks(np.arange(len(norm_array_with)), sorted(list(norm_stat_with.keys()), key=lambda t: t[0]))
-            plt.sca(axs[1, 0]); plt.xticks(np.arange(len(nnz_array_without)), sorted(list(nnz_stat_without.keys()), key=lambda t: t[0]))
-            plt.sca(axs[1, 1]); plt.xticks(np.arange(len(nnz_array_with)), sorted(list(nnz_stat_with.keys()), key=lambda t: t[0]))
+            plt.sca(axs[0, 0]); plt.xticks(np.arange(len(norm_array_without)), sorted(list(norm_stat_without.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[0, 1]); plt.xticks(np.arange(len(norm_array_with)), sorted(list(norm_stat_with.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[1, 0]); plt.xticks(np.arange(len(nnz_array_without)), sorted(list(nnz_stat_without.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[1, 1]); plt.xticks(np.arange(len(nnz_array_with)), sorted(list(nnz_stat_with.keys()), key=lambda t: t[0]), rotation=45)
 
-            plt.sca(axs[2, 0]); plt.xticks(np.arange(len(constr_array_without)), sorted(list(constr_stat_without.keys()), key=lambda t: t[0]))
-            plt.sca(axs[2, 1]); plt.xticks(np.arange(len(constr_array_with)), sorted(list(constr_stat_with.keys()), key=lambda t: t[0]))
-            plt.sca(axs[3, 0]); plt.xticks(np.arange(len(num_range_array_without)), sorted(list(num_range_stat_without.keys()), key=lambda t: t[0]))
-            plt.sca(axs[3, 1]); plt.xticks(np.arange(len(num_range_array_with)), sorted(list(num_range_stat_with.keys()), key=lambda t: t[0]))
+            plt.sca(axs[2, 0]); plt.xticks(np.arange(len(constr_array_without)), sorted(list(constr_stat_without.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[2, 1]); plt.xticks(np.arange(len(constr_array_with)), sorted(list(constr_stat_with.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[3, 0]); plt.xticks(np.arange(len(num_range_array_without)), sorted(list(num_range_stat_without.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[3, 1]); plt.xticks(np.arange(len(num_range_array_with)), sorted(list(num_range_stat_with.keys()), key=lambda t: t[0]), rotation=45)
 
     plt.tight_layout()
     plt.savefig(plot_path + "speedup/" + "speedup_{}_{}_eps{}.png".format(tool, param, eps))
@@ -343,7 +343,7 @@ def plot_failure_rate(param="diag_perturb", tool="nasoq-custom", eps=-6):
         lst = stop_tol_lst
 
     perfcsv_for_param = os.listdir(dir_params + param)
-    fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(20, 20))
+    fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
 
     for csv_name in perfcsv_for_param:
         # find the specified csv
@@ -435,11 +435,12 @@ def plot_failure_rate(param="diag_perturb", tool="nasoq-custom", eps=-6):
             axs[1][1].set_title("{} failure rate vs numerical range \n of QP (eps = {}) over {}".format(tool, eps, param));
             axs[0][0].set(xlabel="norm bin", ylabel="failure rate"); axs[0][1].set(xlabel="nnz bin", ylabel="failure rate")
             axs[1][0].set(xlabel="num of constraints bin", ylabel="failure rate"); axs[1][1].set(xlabel="numerical range bin", ylabel="failure rate")
-            plt.sca(axs[0, 0]); plt.xticks(np.arange(len(norm_frate_array)), sorted(list(norm_frate_stat.keys()), key=lambda t: t[0]))
-            plt.sca(axs[0, 1]); plt.xticks(np.arange(len(nnz_frate_array)), sorted(list(nnz_frate_stat.keys()), key=lambda t: t[0]))
-            plt.sca(axs[1, 0]); plt.xticks(np.arange(len(constr_frate_array)), sorted(list(constr_frate_stat.keys()), key=lambda t: t[0]))
-            plt.sca(axs[1, 1]); plt.xticks(np.arange(len(num_range_frate_array)), sorted(list(num_range_frate_stat.keys()), key=lambda t: t[0]))
+            plt.sca(axs[0, 0]); plt.xticks(np.arange(len(norm_frate_array)), sorted(list(norm_frate_stat.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[0, 1]); plt.xticks(np.arange(len(nnz_frate_array)), sorted(list(nnz_frate_stat.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[1, 0]); plt.xticks(np.arange(len(constr_frate_array)), sorted(list(constr_frate_stat.keys()), key=lambda t: t[0]), rotation=45)
+            plt.sca(axs[1, 1]); plt.xticks(np.arange(len(num_range_frate_array)), sorted(list(num_range_frate_stat.keys()), key=lambda t: t[0]), rotation=45)
 
+    # fig.autofmt_xdate(rotation=45)
     plt.tight_layout()
     plt.savefig(plot_path + "failure_rate/" + "failure_rate_{}_{}_eps{}.png".format(tool, param, eps))
 
