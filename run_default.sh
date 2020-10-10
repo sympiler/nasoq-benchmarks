@@ -24,11 +24,13 @@ do
             > ${DATASET}_test_settings_csvs/nasoq-fixed-eps${eps}.csv
     fi
 
+    echo "runing NASOQ-Tuned"
     if [ ! -f ${DATASET}_tune_csvs/nasoq-tuned-eps${eps}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${diag_perturb} -r ${max_iter} -v tuned" \
             > ${DATASET}_test_settings_csvs/nasoq-tuned-eps${eps}.csv
     fi
 
+    echo "runing NASOQ-Custom"
     if [ ! -f ${DATASET}_tune_csvs/nasoq-custom-eps${eps}.csv ]; then
             bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-p ${diag_perturb} -r ${max_iter} -v predet" \
             > ${DATASET}_test_settings_csvs/nasoq-custom-eps${eps}.csv
