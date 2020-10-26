@@ -226,7 +226,7 @@ def read_SMP(path="test05_0.yml"):
 		# props.inequal_constr_max = np.max(inequal_matrix)
 		# props.inequal_constr_min = np.min(inequal_matrix[np.nonzero(inequal_matrix)])
 		props.inequal_constr_max = ineq_coo.data[ineq_coo.data.argmax()]
-		props.inequal_constr_min = ineq_coo.data[ineq_coo.data.argmax()]
+		props.inequal_constr_min = ineq_coo.data[ineq_coo.data.argmin()]
 
 	return props
 
