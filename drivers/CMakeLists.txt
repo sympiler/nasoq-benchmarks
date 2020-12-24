@@ -5,11 +5,10 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")
 find_package(MKL REQUIRED)
 set(SOURCE_FILES osqp.cpp)
 
-set(OSQP_INCLUDE_DIR ${MKL_INCLUDE_DIR}
+set(OSQP_INCLUDE_DIR ${MKL_INCLUDE_DIR} "${CMAKE_CURRENT_LIST_DIR}/../smp-format/"
         "${CMAKE_CURRENT_LIST_DIR}/../osqp/configure/"
         "${CMAKE_CURRENT_LIST_DIR}/../osqp/include/"
-        "${CMAKE_CURRENT_LIST_DIR}/../osqp/src/"
-        "${CMAKE_CURRENT_LIST_DIR}/../smp-format/")
+        "${CMAKE_CURRENT_LIST_DIR}/../osqp/src/")
 set(OSQP_LIB_DIR ${MKL_LIBRARIES})
 
 add_executable(osqp-bench ${SOURCE_FILES})
