@@ -6,4 +6,4 @@
 	url = https://github.com/sympiler/smp-format
 [submodule "osqp"]
 	path = osqp
-	url = https://github.com/oxfordcontrol/osqp.git
+	url = https://github.com/oxfordcontrol/osqp
