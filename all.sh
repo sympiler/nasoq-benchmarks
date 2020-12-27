@@ -17,11 +17,15 @@ mkdir -p build
 cd build
 
 # build NASOQ
-if [ ! -d nasoq ]; then
+if [ ! -f Makefile ]; then
     cmake -DCMAKE_PREFIX_PATH=$MKLROOT/lib/intel64/ ..
     cmake -DCMAKE_PREFIX_PATH=$MKLROOT/include/ ..
     cmake -DCMAKE_PREFIX_PATH=${METIS_PATH}build/Linux-x86_64/libmetis/ ..
     cmake -DMETIS_ROOT_PATH=$METIS_PATH ..
+fi
+
+if [ -d nasoq ]; then
+    make
 fi
 
 for eps in {-3,-6,-9}; do
