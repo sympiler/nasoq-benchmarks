@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATASET=SMP_Repository/
+DATASET=test_smp/
 BUILDIR=build/
 METIS_PATH=/home/zjming1/metis-5.1.0/
 
@@ -16,7 +16,7 @@ echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
 mkdir -p build
 cd build
 
-# build NASOQ
+# build a makefile
 if [ ! -f Makefile ]; then
     cmake -DCMAKE_PREFIX_PATH=$MKLROOT/lib/intel64/ ..
     cmake -DCMAKE_PREFIX_PATH=$MKLROOT/include/ ..
@@ -24,9 +24,13 @@ if [ ! -f Makefile ]; then
     cmake -DMETIS_ROOT_PATH=$METIS_PATH ..
 fi
 
+# build the project
 if [ -d nasoq ]; then
     make
 fi
+
+# change to the root directory
+cd ..
 
 for eps in {-3,-6}; do
     echo "Running NASOQ-Fixed ..."
