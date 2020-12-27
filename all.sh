@@ -28,7 +28,7 @@ if [ -d nasoq ]; then
     make
 fi
 
-for eps in {-3,-6,-9}; do
+for eps in {-3,-6}; do
     echo "Running NASOQ-Fixed ..."
     bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps> logs/nasoq-fixed-e${eps}.csv
 
