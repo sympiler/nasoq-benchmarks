@@ -42,3 +42,9 @@ for eps in {-3,-6}; do
     echo "Running customized NASOQ ..."
     bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-v predet -r 0"> logs/nasoq-custom-e${eps}.csv
 done
+
+if python -c 'import sys; print(sys.version_info[0])' -eq 2]; then
+    python3 all.py logs
+else
+    python all.py logs
+fi
