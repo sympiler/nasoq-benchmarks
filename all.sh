@@ -25,7 +25,7 @@ if [ ! -f Makefile ]; then
 fi
 
 # build the project
-if [ -d nasoq ]; then
+if [ -d nasoq ]  && [ -d drivers ]; then
     make
 fi
 
@@ -41,6 +41,12 @@ for eps in {-3,-6}; do
 
     echo "Running customized NASOQ ..."
     bash scripts/NASOQ_bench.sh $BUILDIR/nasoq/NASOQ-BIN $DATASET $eps "-v predet -r 0"> logs/nasoq-custom-e${eps}.csv
+
+    echo "Running OSQP ..."
+    bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET $eps> logs/osqp-e${eps}.csv
+
+    echo "Running OSQP-polished ..."
+    bash scripts/NASOQ_bench.sh $BUILDIR/drivers/osqp-bench $DATASET $eps "-v polished"> logs/osqp-polished-e${eps}.csv
 done
 
 if python -c 'import sys; print(sys.version_info[0])' -eq 2]; then
