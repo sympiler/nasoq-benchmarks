@@ -13,6 +13,9 @@ eps=-3
 echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
 
 # make a directory for building project
+if [ -d build ]; then
+    rm -rf build
+fi
 mkdir -p build
 cd build
 
