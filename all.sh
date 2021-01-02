@@ -52,7 +52,8 @@ for eps in {-3,-6}; do
     bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $DATASET $eps "-v polished"> logs/osqp-polished-e${eps}.csv
 done
 
-if [python -c 'import sys; print(sys.version_info[0])' -eq 2]; then
+var="$(python -c 'import sys; print(sys.version_info[0])')"
+if [[ $var == 2 ]]; then
     python3 all.py logs
 else
     python all.py logs
