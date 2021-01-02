@@ -15,7 +15,7 @@
 #include "stdio.h"
 #include <mp_format_converter.h>
 #include <osqp.h>
-#include <util.h>
+#include <Util.h>
 #include "driver_utils.h"
 
 #define MAX_DBL 1e20
