@@ -154,7 +154,11 @@ def read_dir():
 
     for f in os.listdir(path):
         if ".csv" in f:
-            df = pd.read_csv(path + f)
+            try:
+                df = pd.read_csv(path + f)
+            except pd.errors.EmptyDataError:
+                print(path + f + " is empty, a seg fault may occur")
+                continue
             f_snippet = f[:-4]
              
             if "nasoq" in f:

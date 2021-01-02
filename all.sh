@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATASET=test_smp/
-MKL_PATH=$MKLROOT/
+MKL_PATH=$MKLROOT
 METIS_PATH=/home/zjming1/metis-5.1.0/
 
 if [ "$#" -ge 3 ]; then
@@ -52,7 +52,7 @@ for eps in {-3,-6}; do
     bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $DATASET $eps "-v polished"> logs/osqp-polished-e${eps}.csv
 done
 
-if [ python -c 'import sys; print(sys.version_info[0])' -eq 2 ]; then
+if [python -c 'import sys; print(sys.version_info[0])' -eq 2]; then
     python3 all.py logs
 else
     python all.py logs
