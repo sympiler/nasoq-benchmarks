@@ -6,10 +6,11 @@ module load gcc/7.3.0
 module load intel/2019.3
 module load scipy-stack/2019b
 
-DATASET=test_smp/
+DATASET=SMP_Repository/
 MKL_PATH=$MKLROOT
 METIS_PATH=/home/zjming1/metis-5.1.0/
 
+echo "$#"
 if [ "$#" -ge 3 ]; then
 DATASET=$1
 MKL_PATH=$2
