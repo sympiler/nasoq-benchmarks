@@ -4,6 +4,7 @@
 module load cmake/3.12.3
 module load gcc/7.3.0
 module load intel/2019.3
+module load python/3.7.4
 module load scipy-stack/2019b
 
 DATASET=SMP_Repository/
@@ -28,10 +29,10 @@ cd build
 
 # build a makefile
 if [ ! -f Makefile ]; then
-    cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/lib/intel64/ ..
-    cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/include/ ..
-    cmake -DCMAKE_PREFIX_PATH=${METIS_PATH}build/Linux-x86_64/libmetis/ ..
-    cmake -DMETIS_ROOT_PATH=${METIS_PATH} ..
+    cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/lib/intel64/ -DCMAKE_BUILD_TYPE=Release  ..
+    cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/include/ -DCMAKE_BUILD_TYPE=Release  ..
+    cmake -DCMAKE_PREFIX_PATH=${METIS_PATH}build/Linux-x86_64/libmetis/ -DCMAKE_BUILD_TYPE=Release ..
+    cmake -DMETIS_ROOT_PATH=${METIS_PATH} -DCMAKE_BUILD_TYPE=Release ..
 fi
 
 # build the project
