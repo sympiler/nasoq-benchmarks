@@ -4,6 +4,7 @@
 module load cmake/3.12.3
 module load gcc
 module load intel
+module load scipy-stack
 
 DATASET=test_smp/
 MKL_PATH=$MKLROOT
