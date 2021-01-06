@@ -148,7 +148,7 @@ def plot_histogram(data, title, tol):
                 va = 'top'
 
             # Use Y value as label and format number with one decimal place
-            label = "{:.1f}".format(y_value)
+            label = "{:.3f}".format(y_value)
 
             # Create annotation
             ax.annotate(
@@ -175,7 +175,7 @@ def plot_histogram(data, title, tol):
 
     # plt.grid()
     plt.tight_layout()
-    plt.savefig("all_plots/" + title + "_tol{}".format(tol), dpi=100)
+    plt.savefig("all_plots/" + title + "_tol{}".format(tol), dpi=300)
 
 def plot_performance_profiles(rho, tol=''):
     """
@@ -194,7 +194,6 @@ def plot_performance_profiles(rho, tol=''):
     plt.legend()
     plt.title("performance_profile_eps{}".format(tol))
     results_file = "all_plots/" + "performance_profile_tol{}.png".format(tol)
-    plt.savefig(results_file, dpi=100)
     plt.savefig(results_file, dpi=300)
 
 def read_dir():
