@@ -35,7 +35,7 @@ def compute_speedup(status, time_stat):
         i = 0
         while i < len(status[tool]):
             time_stat_copy[tool].append(time_stat[tool][i])
-            if status[tool][i] != 1 or status[tool][i] != "solved":
+            if status[tool][i] != 1 and status[tool][i] != "solved":
                 time_stat_copy[tool][i] = MAX_TIMING
             i += 1
         gmean = geom_mean(np.array(time_stat_copy[tool]), 1.0)
@@ -104,6 +104,8 @@ def plot_histogram(data, title, tol):
     ordered_keys = sorted(data.keys(), key=lambda x: x.lower())
     values = [data[ordered_keys[i]] for i in range(len(ordered_keys))]
     value_series = pd.Series(values)
+    for i in range(len(ordered_keys)):
+        ordered_keys[i] = ordered_keys[i][:-4]
     
     # Plot the figure.
     plt.figure(figsize=(6, 4))
@@ -117,7 +119,7 @@ def plot_histogram(data, title, tol):
     for tick in ax.get_xticklabels():
         tick.set_rotation(30)
     
-    def add_value_labels(ax, spacing=0.0):
+    def add_value_labels(ax, title, spacing=0.0):
         """
         from: https://stackoverflow.com/questions/28931224/adding-value-labels-on-a-matplotlib-bar-chart
         a general approach to add labels on bar chart
@@ -148,7 +150,10 @@ def plot_histogram(data, title, tol):
                 va = 'top'
 
             # Use Y value as label and format number with one decimal place
-            label = "{:.3f}".format(y_value)
+            if title == "failure_rate":
+                label = "{:.2f}%".format(y_value * 100)
+            elif title == "speedup":
+                label = "{:.2f}x".format(y_value)
 
             # Create annotation
             ax.annotate(
@@ -171,7 +176,7 @@ def plot_histogram(data, title, tol):
     # ax.set_title('{} of all tools for tolerence {}'.format(title, tol))
     # plt.ylim(bottom=0)
 
-    add_value_labels(ax)   
+    add_value_labels(ax, title)   
 
     # plt.grid()
     plt.tight_layout()
@@ -185,7 +190,7 @@ def plot_performance_profiles(rho, tol=''):
     ordered_keys = sorted(rho.keys(), key=lambda x: x.lower())
     for solver in rho.keys():
         if solver == "tau": continue
-        plt.plot(rho["tau"], rho[solver], label=solver)
+        plt.plot(rho["tau"], rho[solver], label=solver[:-4])
     plt.xlim(1., 10000.)
     plt.ylim(0., 1.)
     plt.xlabel(r'Performance ratio $\tau$')
