@@ -6,13 +6,13 @@ import matplotlib.pyplot as plt
 import shutil
 
 MAX_TIMING = 1e8
-SOLUTION_PRESENT = [1]
+SOLUTION_PRESENT = [1, "solved"]
 
 def compute_failure_rate(status):
     tools_failure_rate = {}
 
     for tool in status.keys():
-        tools_failure_rate[tool] = 1 - float(status[tool].count(1)) / float(len(status[tool]))
+        tools_failure_rate[tool] = 1 - (float(status[tool].count(1) + status[tool].count("solved")) / float(len(status[tool])))
     return tools_failure_rate
 
 def compute_speedup(status, time_stat):
@@ -35,7 +35,7 @@ def compute_speedup(status, time_stat):
         i = 0
         while i < len(status[tool]):
             time_stat_copy[tool].append(time_stat[tool][i])
-            if status[tool][i] != 1:
+            if status[tool][i] != 1 or status[tool][i] != "solved":
                 time_stat_copy[tool][i] = MAX_TIMING
             i += 1
         gmean = geom_mean(np.array(time_stat_copy[tool]), 1.0)
@@ -99,24 +99,83 @@ def compute_performance_profile(status, time_stat):
 def plot_histogram(data, title, tol):
     plt.figure(figsize=(10, 10))
     x = np.arange(len(list(data.keys())))
-    width = 0.25
+    # width = 0.25
 
     ordered_keys = sorted(data.keys(), key=lambda x: x.lower())
     values = [data[ordered_keys[i]] for i in range(len(ordered_keys))]
-    fig, ax = plt.subplots()
-    rects = ax.bar(x, values, width)
-
-    # Add some text for labels, title and custom x-axis tick labels, etc.
-    ax.set_ylabel(title)
+    value_series = pd.Series(values)
+    
+    # Plot the figure.
+    plt.figure(figsize=(6, 4))
+    ax = value_series.plot(kind='bar')
     ax.set_title('{} of all tools for tolerence {}'.format(title, tol))
-    ax.set_xticks(x)
+    ax.set_xlabel('tools')
+    ax.set_ylabel(title)
     ax.set_xticklabels(ordered_keys)
     ax.set_ylim(bottom=0)
+
     for tick in ax.get_xticklabels():
         tick.set_rotation(30)
+    
+    def add_value_labels(ax, spacing=0.0):
+        """
+        from: https://stackoverflow.com/questions/28931224/adding-value-labels-on-a-matplotlib-bar-chart
+        a general approach to add labels on bar chart
+        Add labels to the end of each bar in a bar chart.
 
+        Arguments:
+            ax (matplotlib.axes.Axes): The matplotlib object containing the axes
+                of the plot to annotate.
+            spacing (int): The distance between the labels and the bars.
+        """
+
+        # For each bar: Place a label
+        for rect in ax.patches:
+            # Get X and Y placement of label from rect.
+            y_value = rect.get_height()
+            x_value = rect.get_x() + rect.get_width() / 2
+
+            # Number of points between bar and label. Change to your liking.
+            space = spacing
+            # Vertical alignment for positive values
+            va = 'bottom'
+
+            # If value of bar is negative: Place label below bar
+            if y_value < 0:
+                # Invert space to place label below
+                space *= -1
+                # Vertically align label at top
+                va = 'top'
+
+            # Use Y value as label and format number with one decimal place
+            label = "{:.1f}".format(y_value)
+
+            # Create annotation
+            ax.annotate(
+                label,                      # Use `label` as label
+                (x_value, y_value),         # Place label at end of the bar
+                xytext=(0, space),          # Vertically shift label by `space`
+                textcoords="offset points", # Interpret `xytext` as offset in points
+                ha='center',                # Horizontally center label
+                va=va)                      # Vertically align label differently for
+                                            # positive and negative values.
+
+
+    # plt.bar(x, height=values, width=width)
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    # plt.xticks(x, ordered_keys, rotation=30)
+    # plt.ylabel(title)
+    # plt.title('{} of all tools for tolerence {}'.format(title, tol))
+
+    # ax.set_ylabel(title)
+    # ax.set_title('{} of all tools for tolerence {}'.format(title, tol))
+    # plt.ylim(bottom=0)
+
+    add_value_labels(ax)   
+
+    # plt.grid()
     plt.tight_layout()
-    plt.savefig("all_plots/" + title + "_tol{}".format(tol))
+    plt.savefig("all_plots/" + title + "_tol{}".format(tol), dpi=100)
 
 def plot_performance_profiles(rho, tol=''):
     """
@@ -161,16 +220,19 @@ def read_dir():
                 continue
             f_snippet = f[:-4]
              
-            if "nasoq" in f:
-                if "-3" in f:
-                    time_3[f_snippet] = df["Time (s)"].values.tolist()
-                    status_3[f_snippet] = df["Status"].values.tolist()
-                elif "-6" in f:
-                    time_6[f_snippet] = df["Time (s)"].values.tolist()
-                    status_6[f_snippet] = df["Status"].values.tolist()
+            if "-3" in f:
+                time_3[f_snippet] = df["Time (s)"].values.tolist()
+                status_3[f_snippet] = df["Status"].values.tolist()
+            elif "-6" in f:
+                time_6[f_snippet] = df["Time (s)"].values.tolist()
+                status_6[f_snippet] = df["Status"].values.tolist()
 
-            elif "osqp" in f:
-                pass
+            if "-3" in f:
+                time_3[f_snippet] = df["Time (s)"].values.tolist()
+                status_3[f_snippet] = df["Status"].values.tolist()
+            elif "-6" in f:
+                time_6[f_snippet] = df["Time (s)"].values.tolist()
+                status_6[f_snippet] = df["Status"].values.tolist()
     
     tools_failure_rate_3 = compute_failure_rate(status_3)
     tools_failure_rate_6 = compute_failure_rate(status_6)
