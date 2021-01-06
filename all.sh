@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# load all modules
+module load cmake/3.12.3
+module load gcc
+module load intel
+
 DATASET=test_smp/
 MKL_PATH=$MKLROOT
 METIS_PATH=/home/zjming1/metis-5.1.0/
