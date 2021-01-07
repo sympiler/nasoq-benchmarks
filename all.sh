@@ -1,17 +1,16 @@
 #!/bin/bash
 
 # load all modules
-module load cmake/3.12.3
-module load gcc/7.3.0
-module load intel/2019.3
-module load python/3.7.4
-module load scipy-stack/2019b
+module load cmake
+module load gcc
+module load intel
+module load python
+module load scipy-stack
 
 DATASET=SMP_Repository/
 MKL_PATH=$MKLROOT
 METIS_PATH=/home/zjming1/metis-5.1.0/
 
-echo "$#"
 if [ "$#" -ge 3 ]; then
 DATASET=$1
 MKL_PATH=$2
@@ -19,6 +18,8 @@ METIS_PATH=$3
 fi
 eps=-3
 echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
+
+source ${MKL_PATH}/bin/mklvars.sh intel64
 
 # make a directory for building project
 if [ -d build ]; then
@@ -31,8 +32,8 @@ cd build
 if [ ! -f Makefile ]; then
     cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/lib/intel64/ -DCMAKE_BUILD_TYPE=Release  ..
     cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/include/ -DCMAKE_BUILD_TYPE=Release  ..
-    cmake -DCMAKE_PREFIX_PATH=${METIS_PATH}build/Linux-x86_64/libmetis/ -DCMAKE_BUILD_TYPE=Release ..
-    cmake -DMETIS_ROOT_PATH=${METIS_PATH} -DCMAKE_BUILD_TYPE=Release ..
+    cmake -DCMAKE_PREFIX_PATH=${METIS_PATH}/build/Linux-x86_64/libmetis/ -DCMAKE_BUILD_TYPE=Release ..
+    cmake -DMETIS_ROOT_PATH=${METIS_PATH}/ -DCMAKE_BUILD_TYPE=Release ..
 fi
 
 # build the project
