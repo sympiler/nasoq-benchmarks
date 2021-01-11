@@ -88,7 +88,7 @@ for eps in {-3,-6}; do
                 fi
 
                 echo "Running customized NASOQ ..."
-                if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv ]; them
+                if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv ]; then
                     bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v predet -r 0 -d 1 > ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv
                 else
                     bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v predet -r 0 >> ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv
