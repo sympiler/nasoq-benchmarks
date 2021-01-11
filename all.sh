@@ -49,7 +49,6 @@ if [ -d logs/perf_data ]; then
     rm -rf logs/perf_data
 fi
 mkdir -p logs/perf_data
-cd logs/perf_data
 
 for eps in {-3,-6}; do
     for d in ${DATASET}/*/; do
