@@ -75,37 +75,37 @@ for eps in {-3,-6}; do
             if [ "${d: -4}" == ".yml" ]; then
                 echo "Running NASOQ-Fixed ..."
                 if [ ! -f ${dir}/logs/perf_data/nasoq-fixed-e${eps}-non-class.csv ]; then
-                    bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -d 1 > ${dir}/logs/perf_data/nasoq-fixed-e${eps}-non-class.csv
+                    ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -d 1 > ${dir}/logs/perf_data/nasoq-fixed-e${eps}-non-class.csv
                 else
-                    bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps >> ${dir}/logs/perf_data/nasoq-fixed-e${eps}-non-class.csv
+                    ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps >> ${dir}/logs/perf_data/nasoq-fixed-e${eps}-non-class.csv
                 fi
 
                 echo "Running NASOQ-Tuned ..."
                 if [ ! -f ${dir}/logs/perf_data/nasoq-tuned-e${eps}-non-class.csv ]; then
-                    bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v tuned -d 1 > ${dir}/logs/perf_data/nasoq-tuned-e${eps}-non-class.csv
+                    ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v tuned -d 1 > ${dir}/logs/perf_data/nasoq-tuned-e${eps}-non-class.csv
                 else
-                    bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v tuned >> ${dir}/logs/perf_data/nasoq-tuned-e${eps}-non-class.csv
+                    ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v tuned >> ${dir}/logs/perf_data/nasoq-tuned-e${eps}-non-class.csv
                 fi
 
                 echo "Running customized NASOQ ..."
                 if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv ]; then
-                    bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v predet -r 0 -d 1 > ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv
+                    ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v predet -r 0 -d 1 > ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv
                 else
-                    bash ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v predet -r 0 >> ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv
+                    ${dir}/build/nasoq/NASOQ-BIN -i $d -e $eps -v predet -r 0 >> ${dir}/logs/perf_data/nasoq-custom-e${eps}-non-class.csv
                 fi
 
                 echo "Running OSQP ..."
                 if [ ! -f ${dir}/logs/perf_data/osqp-e${eps}-non-class.csv ]; then
-                    bash ${dir}/build/drivers/osqp-bench -i $d -e $eps -d 1 > ${dir}/logs/perf_data/osqp-e${eps}-non-class.csv
+                    ${dir}/build/drivers/osqp-bench -i $d -e $eps -d 1 > ${dir}/logs/perf_data/osqp-e${eps}-non-class.csv
                 else
-                    bash ${dir}/build/drivers/osqp-bench -i $d -e $eps >> ${dir}/logs/perf_data/osqp-e${eps}-non-class.csv
+                    ${dir}/build/drivers/osqp-bench -i $d -e $eps >> ${dir}/logs/perf_data/osqp-e${eps}-non-class.csv
                 fi
 
                 echo "Running OSQP-polished ..."
                 if [ ! -f ${dir}/logs/perf_data/osqp-polished-e${eps}-non-class.csv ]; then
-                    bash ${dir}/build/drivers/osqp-bench -i $d -e $eps -v polished -d 1 > ${dir}/logs/perf_data/osqp-polished-e${eps}-non-class.csv
+                    ${dir}/build/drivers/osqp-bench -i $d -e $eps -v polished -d 1 > ${dir}/logs/perf_data/osqp-polished-e${eps}-non-class.csv
                 else
-                    bash ${dir}/build/drivers/osqp-bench -i $d -e $eps -v polished >> ${dir}/logs/perf_data/osqp-polished-e${eps}-non-class.csv
+                    ${dir}/build/drivers/osqp-bench -i $d -e $eps -v polished >> ${dir}/logs/perf_data/osqp-polished-e${eps}-non-class.csv
                 fi
             fi
         fi
