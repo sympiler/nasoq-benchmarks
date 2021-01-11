@@ -22,24 +22,24 @@ echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
 source ${MKL_PATH}/bin/mklvars.sh intel64
 
 # make a directory for building project
-if [ -d build ]; then
-    rm -rf build
-fi
+# if [ -d build ]; then
+#     rm -rf build
+# fi
 mkdir -p build
 cd build
 
 # build a makefile
-if [ ! -f Makefile ]; then
-    cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/lib/intel64/ -DCMAKE_BUILD_TYPE=Release  ..
-    cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/include/ -DCMAKE_BUILD_TYPE=Release  ..
-    cmake -DCMAKE_PREFIX_PATH=${METIS_PATH}/build/Linux-x86_64/libmetis/ -DCMAKE_BUILD_TYPE=Release ..
-    cmake -DMETIS_ROOT_PATH=${METIS_PATH}/ -DCMAKE_BUILD_TYPE=Release ..
-fi
+# if [ ! -f Makefile ]; then
+cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/lib/intel64/ -DCMAKE_BUILD_TYPE=Release  ..
+cmake -DCMAKE_PREFIX_PATH=${MKL_PATH}/include/ -DCMAKE_BUILD_TYPE=Release  ..
+cmake -DCMAKE_PREFIX_PATH=${METIS_PATH}/build/Linux-x86_64/libmetis/ -DCMAKE_BUILD_TYPE=Release ..
+cmake -DMETIS_ROOT_PATH=${METIS_PATH}/ -DCMAKE_BUILD_TYPE=Release ..
+# fi
 
 # build the project
-if [ -d nasoq ]  && [ -d drivers ]; then
-    make
-fi
+# if [ -d nasoq ]  && [ -d drivers ]; then
+make
+# fi
 
 # change to the root directory
 cd ..
