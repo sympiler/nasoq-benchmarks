@@ -219,8 +219,9 @@ def merge_data(path):
                 if solver in f and p in f:
                     df = pd.read_csv(f, index_col=None, header=0)
                     li.append(df)
-            frame = pd.concat(li, ignore_index=True)
-            frame.to_csv(path + "/merge/" + solver + p + ".csv")
+            if li:
+                frame = pd.concat(li, ignore_index=True)
+                frame.to_csv(path + "/merge/" + solver + p + ".csv")
 
 
 def read_dir(path):
@@ -281,4 +282,4 @@ if __name__ == "__main__":
     if not path.endswith("/"):
         path = path + "/"
     merge_data(path)
-    read_dir(path + "/merge")
+    read_dir(path + "/merge/")
