@@ -4,6 +4,7 @@ import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 import shutil
+import glob
 
 MAX_TIMING = 1e8
 SOLUTION_PRESENT = [1, "solved"]
@@ -201,11 +202,27 @@ def plot_performance_profiles(rho, tol=''):
     results_file = "all_plots/" + "performance_profile_tol{}.png".format(tol)
     plt.savefig(results_file, dpi=300)
 
-def read_dir():
-    path = sys.argv[1]
-    if not path.endswith("/"):
-        path = path + "/"
 
+def merge_data(path):
+    if not os.path.exists(path + "/merge"):
+        os.mkdir(path + "/merge")
+
+    p1 = "-e-3"
+    p2 = "-e-6"
+
+    solvers = ["nasoq-fixed", "nasoq-tuned", "nasoq-custom", "gurobi", "mosek", "osqp", "osqp-polished"]
+
+    for solver in solvers:
+        for p in [p1, p2]:
+            li = []
+            for f in glob.glob(path + "/*.csv"):
+                if solver in f and p in f:
+                    df = pd.read_csv(f, index_col=None, header=0)
+            frame = pd.concat(li, ignore_index=True)
+            frame.to_csv(path + "/merge/" + solver + p + ".csv")
+
+
+def read_dir(path):
     if os.path.exists("all_plots/"):
         shutil.rmtree("all_plots/")
     os.makedirs("all_plots/")
@@ -259,4 +276,8 @@ def read_dir():
     plot_histogram(tools_speedup_6, "speedup", -6)
 
 if __name__ == "__main__":
-    read_dir()
+    path = sys.argv[1]
+    if not path.endswith("/"):
+        path = path + "/"
+    merge_data(path)
+    read_dir(path + "/merge")

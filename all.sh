@@ -44,26 +44,52 @@ fi
 # change to the root directory
 cd ..
 
+# make a directory for performance data
+if [ -d logs/perf_data ]; then
+    rm -rf logs/perf_data
+fi
+mkdir -p logs/perf_data
+cd logs/perf_data
+
 for eps in {-3,-6}; do
-    echo "Running NASOQ-Fixed ..."
-    bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $DATASET $eps> logs/nasoq-fixed-e${eps}.csv
+    for d in ${DATASET}/*/; do
+        echo "Running NASOQ-Fixed ..."
+        bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $d $eps> logs/perf_data/nasoq-fixed-e${eps}-${d}.csv
 
-    echo "Running NASOQ-Tuned ..."
-    bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $DATASET $eps "-v tuned"> logs/nasoq-tuned-e${eps}.csv
+        echo "Running NASOQ-Tuned ..."
+        bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $d $eps "-v tuned"> logs/perf_data/nasoq-tuned-e${eps}-${d}.csv
 
-    echo "Running customized NASOQ ..."
-    bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $DATASET $eps "-v predet -r 0"> logs/nasoq-custom-e${eps}.csv
+        echo "Running customized NASOQ ..."
+        bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $d $eps "-v predet -r 0"> logs/perf_data/nasoq-custom-e${eps}-${d}.csv
 
-    echo "Running OSQP ..."
-    bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $DATASET $eps> logs/osqp-e${eps}.csv
+        echo "Running OSQP ..."
+        bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $d $eps> logs/perf_data/osqp-e${eps}-${d}.csv
 
-    echo "Running OSQP-polished ..."
-    bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $DATASET $eps "-v polished"> logs/osqp-polished-e${eps}.csv
+        echo "Running OSQP-polished ..."
+        bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $d $eps "-v polished"> logs/perf_data/osqp-polished-e${eps}-${d}.csv
+    done
+
+    for f in ${DATASET}/*.csv; do
+        echo "Running NASOQ-Fixed ..."
+        bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $f $eps> logs/perf_data/nasoq-fixed-e${eps}-non-class.csv
+
+        echo "Running NASOQ-Tuned ..."
+        bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $f $eps "-v tuned"> logs/perf_data/nasoq-tuned-e${eps}-non-class.csv
+
+        echo "Running customized NASOQ ..."
+        bash scripts/NASOQ_bench.sh build/nasoq/NASOQ-BIN $f $eps "-v predet -r 0"> logs/perf_data/nasoq-custom-e${eps}-non-class.csv
+
+        echo "Running OSQP ..."
+        bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $f $eps> logs/perf_data/osqp-e${eps}-non-class.csv
+
+        echo "Running OSQP-polished ..."
+        bash scripts/NASOQ_bench.sh build/drivers/osqp-bench $f $eps "-v polished"> logs/perf_data/osqp-polished-e${eps}-non-class.csv
+    done
 done
 
 var="$(python -c 'import sys; print(sys.version_info[0])')"
 if [[ $var == 2 ]]; then
-    python3 all.py logs
+    python3 all.py logs/perf_data
 else
-    python all.py logs
+    python all.py logs/perf_data
 fi
