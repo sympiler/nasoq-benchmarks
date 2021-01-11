@@ -218,6 +218,7 @@ def merge_data(path):
             for f in glob.glob(path + "/*.csv"):
                 if solver in f and p in f:
                     df = pd.read_csv(f, index_col=None, header=0)
+                    li.append(df)
             frame = pd.concat(li, ignore_index=True)
             frame.to_csv(path + "/merge/" + solver + p + ".csv")
 
