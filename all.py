@@ -204,6 +204,8 @@ def plot_performance_profiles(rho, tol=''):
 
 
 def merge_data(path):
+    if os.path.exists(path + "/merge"):
+        shutil.rmtree(path + "/merge")
     if not os.path.exists(path + "/merge"):
         os.mkdir(path + "/merge")
 
@@ -217,7 +219,9 @@ def merge_data(path):
             li = []
             for f in glob.glob(path + "/*.csv"):
                 if solver in f and p in f:
-                    df = pd.read_csv(f, index_col=None, header=0)
+                    if solver == "osqp" and "osqp-polished" in f:
+                        continue
+                    df = pd.read_csv(f, index_col=None, header=0, na_values="N/A", na_filter=False)
                     li.append(df)
             if li:
                 frame = pd.concat(li, ignore_index=True)
