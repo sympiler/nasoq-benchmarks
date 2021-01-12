@@ -73,12 +73,12 @@ for eps in {-3,-6}; do
             fi
 
             echo "Running OSQP ..."
-            if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-${d}.csv ]; then
+            if [ ! -f ${dir}/logs/perf_data/osqp-e${eps}-${d}.csv ]; then
                 bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/drivers/osqp-bench $d $eps> ${dir}/logs/perf_data/osqp-e${eps}-${d}.csv
             fi
 
             echo "Running OSQP-polished ..."
-            if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-${d}.csv ]; then
+            if [ ! -f ${dir}/logs/perf_data/osqp-polished-e${eps}-${d}.csv ]; then
                 bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/drivers/osqp-bench $d $eps "-v polished"> ${dir}/logs/perf_data/osqp-polished-e${eps}-${d}.csv
             fi
         else
