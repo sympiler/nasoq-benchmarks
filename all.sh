@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH --mem=40GB
 
 # load all modules
 module load cmake
