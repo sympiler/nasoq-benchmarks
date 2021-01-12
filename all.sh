@@ -45,9 +45,9 @@ make
 cd ..
 
 # make a directory for performance data
-if [ -d logs/perf_data ]; then
-    rm -rf logs/perf_data
-fi
+# if [ -d logs/perf_data ]; then
+#     rm -rf logs/perf_data
+# fi
 mkdir -p logs/perf_data
 
 dir=$PWD
@@ -58,19 +58,29 @@ for eps in {-3,-6}; do
         echo $d
         if [ -d "$d" ]; then
             echo "Running NASOQ-Fixed ..."
-            bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/nasoq/NASOQ-BIN $d $eps> ${dir}/logs/perf_data/nasoq-fixed-e${eps}-${d}.csv
+            if [ ! -f ${dir}/logs/perf_data/nasoq-fixed-e${eps}-${d}.csv ]; then
+                bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/nasoq/NASOQ-BIN $d $eps> ${dir}/logs/perf_data/nasoq-fixed-e${eps}-${d}.csv
+            fi
 
             echo "Running NASOQ-Tuned ..."
-            bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/nasoq/NASOQ-BIN $d $eps "-v tuned"> ${dir}/logs/perf_data/nasoq-tuned-e${eps}-${d}.csv
+            if [ ! -f ${dir}/logs/perf_data/nasoq-tuned-e${eps}-${d}.csv ]; then
+                bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/nasoq/NASOQ-BIN $d $eps "-v tuned"> ${dir}/logs/perf_data/nasoq-tuned-e${eps}-${d}.csv
+            fi
 
             echo "Running customized NASOQ ..."
-            bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/nasoq/NASOQ-BIN $d $eps "-v predet -r 0"> ${dir}/logs/perf_data/nasoq-custom-e${eps}-${d}.csv
+            if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-${d}.csv ]; then
+                bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/nasoq/NASOQ-BIN $d $eps "-v predet -r 0"> ${dir}/logs/perf_data/nasoq-custom-e${eps}-${d}.csv
+            fi
 
             echo "Running OSQP ..."
-            bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/drivers/osqp-bench $d $eps> ${dir}/logs/perf_data/osqp-e${eps}-${d}.csv
+            if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-${d}.csv ]; then
+                bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/drivers/osqp-bench $d $eps> ${dir}/logs/perf_data/osqp-e${eps}-${d}.csv
+            fi
 
             echo "Running OSQP-polished ..."
-            bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/drivers/osqp-bench $d $eps "-v polished"> ${dir}/logs/perf_data/osqp-polished-e${eps}-${d}.csv
+            if [ ! -f ${dir}/logs/perf_data/nasoq-custom-e${eps}-${d}.csv ]; then
+                bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/drivers/osqp-bench $d $eps "-v polished"> ${dir}/logs/perf_data/osqp-polished-e${eps}-${d}.csv
+            fi
         else
             if [ "${d: -4}" == ".yml" ]; then
                 echo "Running NASOQ-Fixed ..."
