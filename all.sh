@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# load all modules
-module load cmake
-module load gcc
-module load intel
-module load python
-module load scipy-stack
-
 DATASET=SMP_Repository/
 MKL_PATH=$MKLROOT
 METIS_PATH=/home/zjming1/metis-5.1.0/
