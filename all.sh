@@ -1,5 +1,4 @@
 #!/bin/bash
-#SBATCH --mem=80GB
 
 # load all modules
 module load cmake
@@ -129,10 +128,3 @@ for eps in {-3,-6}; do
 done
 
 cd $dir
-
-var="$(python -c 'import sys; print(sys.version_info[0])')"
-if [[ $var == 2 ]]; then
-    python3 all.py logs/perf_data
-else
-    python all.py logs/perf_data
-fi
