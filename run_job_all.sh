@@ -17,6 +17,6 @@ module load intel
 module load python
 module load scipy-stack
 
-sbatch all.sh ../SMP_Repository $MKLROOT /home/zjming1/metis-5.1.0/
-sbatch all.sh ../SMP_Repository2 $MKLROOT /home/zjming1/metis-5.1.0/
-sbatch all_plot.sh
+./all.sh ../SMP_Repository $MKLROOT /home/zjming1/metis-5.1.0/
+./all.sh ../SMP_Repository2 $MKLROOT /home/zjming1/metis-5.1.0/
+./all_plot.sh
