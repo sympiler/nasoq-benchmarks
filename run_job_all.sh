@@ -5,7 +5,7 @@
 #SBATCH --ntasks-per-node=32
 #SBATCH --export=ALL
 #SBATCH -t 23:59:00
-#SBATCH --mem=40GB
+#SBATCH --mem=80GB
 #SBATCH --mail-type=begin  # email me when the job starts
 #SBATCH --mail-type=end    # email me when the job finishes
 export OMP_NUM_THREADS=8
