@@ -1,0 +1,7 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ,bunny2_bunny0,32454,602460,0,0,177,4248,8,0.001,0,0,1e-15,1e-09,1,12,0.70355,12,1.37649e-11,2.75135e-07,-21.492,1.04966e-13,-21.492,0,5.17294e-14,contact simulation,computer graphics,
+NASOQ,bunny2_bunny1,32454,602460,0,0,51,1224,8,0.001,0,0,1e-15,1e-09,1,5,0.577471,5,2.96213e-12,3.09368e-08,-21.6853,4.23816e-14,-21.6853,0,4.09181e-14,contact simulation,computer graphics,
+NASOQ,bunny2_falling0,16227,301230,0,0,1167,3501,8,0.001,0,0,1e-15,1e-09,1,282,10.9184,278,0.000994394,6.23311e-08,-2.17778,1.59118e-09,-2.17778,0,3.4913e-10,contact simulation,computer graphics,
+NASOQ,bunny_bunny0,32454,602460,0,0,177,4248,8,0.001,0,0,1e-15,1e-09,1,12,0.711288,12,1.37639e-11,2.75135e-07,-21.492,1.04958e-13,-21.492,0,5.17169e-14,contact simulation,computer graphics,
+NASOQ,bunny_bunny1,32454,602460,0,0,51,1224,8,0.001,0,0,1e-15,1e-09,1,5,0.571722,5,2.96241e-12,3.09368e-08,-21.6853,4.23905e-14,-21.6853,0,4.0922e-14,contact simulation,computer graphics,
+NASOQ,bunny_falling0,16227,301230,0,0,1167,3501,8,0.001,0,0,1e-15,1e-09,1,282,10.8947,278,0.000994394,6.23311e-08,-2.17778,1.59118e-09,-2.17778,0,3.4913e-10,contact simulation,computer graphics,

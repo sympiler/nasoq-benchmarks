@@ -1,0 +1,4 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ-TUNED,matt_qp1,234,1182,0,0,30,164,8,1e-06,2,2,1e-15,1e-09,1,3,0.0172763,3,8.88178e-16,5.68434e-14,-1991.83,5.32054e-13,-1991.83,0,5.32054e-13,contact simulation,computer graphics,
+NASOQ-TUNED,matt_qp2,5085,32454,0,0,37,184,8,1e-06,2,2,1e-15,1e-09,1,4,0.120062,4,5.55112e-17,1.95399e-14,-3536.31,3.84964e-16,-3536.31,0,5.61884e-16,contact simulation,computer graphics,
+NASOQ-TUNED,matt_qp3,5085,32454,0,0,72,355,8,1e-06,2,2,1e-15,1e-09,1,5,0.128701,5,1.11022e-16,1.95399e-14,-3408.65,-8.44685e-16,-3408.65,0,1.22334e-15,contact simulation,computer graphics,

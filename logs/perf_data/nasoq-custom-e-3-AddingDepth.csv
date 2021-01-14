@@ -1,0 +1,7 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ,bunny,19359,71550,1136,2272,404,808,8,0.001,0,0,1e-15,1e-09,1,187,0.98715,187,2.90482e-08,3.53015e-05,-403755,1.18188e-06,-403755,0,4.04982e-07,model construction,computer graphics,
+NASOQ,elephant,39249,146568,502,1004,1650,3300,8,0.001,0,0,1e-15,1e-09,1,626,6.19699,626,9.66114e-08,7.51358e-05,-2.89857e+06,1.33681e-05,-2.89857e+06,0,1.9018e-06,model construction,computer graphics,
+NASOQ,farmer,32818,120605,2405,4810,404,808,8,0.001,0,0,1e-15,1e-09,1,4,0.334227,4,4.81704e-08,4.97088e-05,-813465,7.23598e-11,-813465,0,6.80726e-11,model construction,computer graphics,
+NASOQ,lamb,29600,108997,702,1404,1838,3676,8,0.001,0,0,1e-15,1e-09,1,539,4.05353,539,4.98127e-08,6.14315e-05,-1.49193e+06,7.00364e-06,-1.49193e+06,0,1.67989e-06,model construction,computer graphics,
+NASOQ,unicorn,21531,79488,242,484,617,1234,8,0.001,0,0,1e-15,1e-09,1,189,1.37986,189,4.02311e-08,2.54331e-05,-710565,2.46854e-06,-710565,0,6.79909e-07,model construction,computer graphics,
+NASOQ,wolf,31508,115397,377,754,989,1978,8,0.001,0,0,1e-15,1e-09,1,355,2.67166,355,4.61324e-08,0.000104597,-1.63465e+06,5.8513e-06,-1.63465e+06,0,1.06889e-06,model construction,computer graphics,

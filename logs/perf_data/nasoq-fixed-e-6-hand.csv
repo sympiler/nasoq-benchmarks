@@ -1,0 +1,4 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ-Fixed,hand1_s,1053,10847,3,3,2100,2100,8,1e-06,3,3,1e-15,1e-09,1,48,1.28806,22,4.54747e-13,3.74785e-07,22.0089,4.92684e-16,22.0089,2.71051e-20,4.92675e-16,image deformation,computer graphics,
+NASOQ-Fixed,hand2_s,1053,10847,3,3,2100,2100,8,1e-06,3,3,1e-15,1e-09,1,45,0.892042,25,2.22382e-27,1.95578e-07,6.32949,-8.90425e-19,6.32949,0,8.90424e-19,image deformation,computer graphics,
+NASOQ-Fixed,hand3_s,1053,10847,3,3,2100,2100,8,1e-06,3,3,1e-15,1e-09,1,50,1.11035,24,9.91128e-24,8.2422e-07,20.526,-1.34416e-17,20.526,0,1.2412e-17,image deformation,computer graphics,

@@ -1,0 +1,4 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+OSQP-polished,hand1_s,1053,10847,N/A,N/A,1053,1053,8,0.001,N/A,N/A,N/A,N/A,solved,200,0.126719,N/A,6.56169,0.000155178,63.9662,N/A,N/A,0.0950843,0.0163827,image deformation,computer graphics,
+OSQP-polished,hand2_s,1053,10847,N/A,N/A,1053,1053,8,0.001,N/A,N/A,N/A,N/A,solved,200,0.120355,N/A,5.32527,0.000207843,83.8206,N/A,N/A,0.00418087,0.000863815,image deformation,computer graphics,
+OSQP-polished,hand3_s,1053,10847,N/A,N/A,1053,1053,8,0.001,N/A,N/A,N/A,N/A,solved,225,0.123133,N/A,6.09003,0.000408622,69.1803,N/A,N/A,0.112057,0.0184001,image deformation,computer graphics,

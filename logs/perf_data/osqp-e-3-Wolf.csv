@@ -1,0 +1,7 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+OSQP,wolf_falling0,2058,32313,N/A,N/A,7,21,8,0.001,N/A,N/A,N/A,N/A,solved,75,0.0873638,N/A,3.96347e-06,5.96046e-08,-4.02433e+10,N/A,N/A,0.115101,3.96347e-06,contact simulation,computer graphics,
+OSQP,wolf_falling1,2058,32313,N/A,N/A,15,45,8,0.001,N/A,N/A,N/A,N/A,solved,75,0.0867615,N/A,9.05818e-06,2.98023e-08,-4.03611e+10,N/A,N/A,0.138448,9.05818e-06,contact simulation,computer graphics,
+OSQP,wolf_falling2,2058,32313,N/A,N/A,28,84,8,0.001,N/A,N/A,N/A,N/A,solved,75,0.0927683,N/A,1.77972e-05,3.72529e-08,-4.04293e+10,N/A,N/A,0.309061,1.77972e-05,contact simulation,computer graphics,
+OSQP,wolf_falling3,2058,32313,N/A,N/A,41,123,8,0.001,N/A,N/A,N/A,N/A,solved,75,0.0876828,N/A,5.17596e-05,0.150962,-4.04533e+10,N/A,N/A,2.58335,5.17596e-05,contact simulation,computer graphics,
+OSQP,wolf_falling4,2058,32313,N/A,N/A,53,159,8,0.001,N/A,N/A,N/A,N/A,solved,75,0.0857978,N/A,9.90125e-06,0.0403638,-4.04421e+10,N/A,N/A,0.934238,9.07985e-06,contact simulation,computer graphics,
+OSQP,wolf_falling5,2058,32313,N/A,N/A,67,201,8,0.001,N/A,N/A,N/A,N/A,solved,75,0.0891413,N/A,0.000743815,0.301003,-4.03515e+10,N/A,N/A,155.772,0.000743815,contact simulation,computer graphics,

@@ -1,0 +1,7 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ-TUNED,ph10.mtx,114309,2206404,0,0,881,1762,8,0.001,2,2,1e-15,1e-09,1,0,2.24181,0,0.000340198,1.49566e-16,-0.00165717,0,-0.00165717,0,0,contact simulation,computer graphics,
+NASOQ-TUNED,ph176.mtx,114309,2206404,0,0,7546,15092,8,0.001,2,2,1e-15,1e-09,1,125,45.9782,123,0.000993083,5.88002e-14,-1.32857,-4.97728e-18,-1.32857,0,1.78988e-18,contact simulation,computer graphics,
+NASOQ-TUNED,ph177.mtx,114309,2206404,0,0,14155,28310,8,0.001,2,2,1e-20,1e-11,1,717,237.338,693,0.000993658,3.74804e-13,17.6728,-2.80937e-14,17.6728,0,2.35588e-14,contact simulation,computer graphics,
+NASOQ-TUNED,ph178.mtx,114309,2206404,0,0,14191,28382,8,0.001,2,2,1e-20,1e-11,1,900,395.203,868,0.00098803,1.07284e-12,14.3028,1.17388e-13,14.3028,0,9.03779e-14,contact simulation,computer graphics,
+NASOQ-TUNED,ph8.mtx,114309,2206404,0,0,881,1762,8,0.001,2,2,1e-15,1e-09,1,7,5.45357,7,0.00076974,2.36882e-15,-0.14545,4.71045e-19,-0.14545,0,3.06467e-19,contact simulation,computer graphics,
+NASOQ-TUNED,ph9.mtx,114309,2206404,0,0,881,1762,8,0.001,2,2,1e-15,1e-09,1,1,3.37998,1,0.00054555,1.32303e-16,-0.0038258,0,-0.0038258,0,0,contact simulation,computer graphics,

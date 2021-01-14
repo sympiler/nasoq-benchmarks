@@ -1,0 +1,7 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+OSQP,bunny,19359,71550,N/A,N/A,1540,3080,8,1e-06,N/A,N/A,N/A,N/A,solved,625,2.85541,N/A,3.98328e-06,6.19058e-05,-403755,N/A,N/A,3.13783e-06,3.98328e-06,model construction,computer graphics,
+OSQP,elephant,39249,146568,N/A,N/A,2152,4304,8,1e-06,N/A,N/A,N/A,N/A,solved,900,7.86123,N/A,7.45755e-05,0.000168645,-2.89857e+06,N/A,N/A,0.00024212,7.45755e-05,model construction,computer graphics,
+OSQP,farmer,32818,120605,N/A,N/A,2809,5618,8,1e-06,N/A,N/A,N/A,N/A,solved,650,4.28186,N/A,0.000106315,9.85964e-06,-813465,N/A,N/A,0.000257141,0.000106315,model construction,computer graphics,
+OSQP,lamb,29600,108997,N/A,N/A,2540,5080,8,1e-06,N/A,N/A,N/A,N/A,solved,1625,9.63912,N/A,0.000165877,8.56584e-05,-1.49193e+06,N/A,N/A,0.000275704,0.000165877,model construction,computer graphics,
+OSQP,unicorn,21531,79488,N/A,N/A,859,1718,8,1e-06,N/A,N/A,N/A,N/A,solved,275,1.32341,N/A,8.52786e-05,4.08582e-05,-710565,N/A,N/A,0.000443361,8.52786e-05,model construction,computer graphics,
+OSQP,wolf,31508,115397,N/A,N/A,1366,2732,8,1e-06,N/A,N/A,N/A,N/A,solved,3725,26.6669,N/A,1.11008e-05,0.000115445,-1.63465e+06,N/A,N/A,3.87393e-06,1.11008e-05,model construction,computer graphics,

@@ -1,0 +1,4 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ-TUNED,nail07t,3245,55186,56,56,25,25,8,0.001,2,2,1e-15,1e-09,1,25,0.30377,25,1.09829e-29,4.59515e-20,-0.00288332,-3.00458e-38,-0.00288332,0,9.99379e-39,cloth simulation,computer graphics,
+NASOQ-TUNED,nail08t,3257,55780,56,56,25,25,8,0.001,2,2,1e-15,1e-09,1,25,0.275042,25,2.77556e-17,5.56924e-20,-0.00369063,-8.80657e-22,-0.00369063,0,3.14233e-22,cloth simulation,computer graphics,
+NASOQ-TUNED,nail09t,3257,55777,56,56,25,25,8,0.001,2,2,1e-15,1e-09,1,25,0.280879,25,5.55112e-17,7.12566e-20,-0.0044428,1.99113e-21,-0.0044428,0,1.98089e-21,cloth simulation,computer graphics,

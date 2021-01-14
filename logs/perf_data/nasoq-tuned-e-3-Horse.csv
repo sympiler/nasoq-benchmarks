@@ -1,0 +1,6 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ-TUNED,horse_falling0,10917,193455,0,0,342,1026,8,0.001,2,2,1e-15,1e-09,1,48,1.3836,28,3.60822e-16,1.40225e-13,-3.59979,2.29192e-16,-3.59979,0,9.70798e-17,contact simulation,computer graphics,
+NASOQ-TUNED,horse_horse0,21834,386910,0,0,33,792,8,0.001,2,2,1e-15,1e-09,1,3,0.37264,3,0,1.35829e-15,-7.40588,-3.04741e-18,-7.40588,0,1.67542e-18,contact simulation,computer graphics,
+NASOQ-TUNED,horse_horse2,21834,386910,0,0,87,2088,8,0.001,2,2,1e-15,1e-09,1,10,0.71368,8,5.55112e-16,1.5439e-15,-7.37876,-8.87013e-19,-7.37876,0,4.50814e-19,contact simulation,computer graphics,
+NASOQ-TUNED,horse_horse3,21834,386910,0,0,69,1656,8,0.001,2,2,1e-15,1e-09,1,15,0.767613,7,1.73472e-15,1.1588e-15,-7.36554,1.01073e-17,-7.36554,2.71051e-20,6.65285e-18,contact simulation,computer graphics,
+NASOQ-TUNED,horse_horse4,21834,386910,0,0,69,1656,8,0.001,2,2,1e-15,1e-09,1,3,0.414685,3,1.77289e-15,1.30798e-15,-7.31298,6.76435e-18,-7.31298,0,5.50462e-18,contact simulation,computer graphics,

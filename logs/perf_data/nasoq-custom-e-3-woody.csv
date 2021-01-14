@@ -1,0 +1,6 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ,woody1,694,6472,5,5,1378,1378,8,0.001,0,0,1e-15,1e-09,1,29,0.0725513,23,0.000887391,1.41122e-16,0.000125427,1.89453e-16,0.000125427,0,8.83956e-17,image deformation,computer graphics,
+NASOQ,woody2,694,6472,5,5,1378,1378,8,0.001,0,0,1e-15,1e-09,1,23,0.0694161,21,0.000917071,2.25172e-07,0.00010625,1.15385e-16,0.00010625,0,3.41763e-17,image deformation,computer graphics,
+NASOQ,woody3,694,6472,5,5,1378,1378,8,0.001,0,0,1e-15,1e-09,1,23,0.0722328,23,0.000974133,2.08167e-16,0.000109036,9.97382e-17,0.000109036,0,4.2347e-17,image deformation,computer graphics,
+NASOQ,woody4,694,6472,5,5,1378,1378,8,0.001,0,0,1e-15,1e-09,1,39,0.0848668,31,0.000956954,3.92163e-07,0.000567546,3.21632e-16,0.000567546,3.38813e-21,7.60787e-17,image deformation,computer graphics,
+NASOQ,woody5,694,6472,5,5,1378,1378,8,0.001,0,0,1e-15,1e-09,1,23,0.067244,23,0.000879113,1.02435e-07,0.000109251,1.13534e-16,0.000109251,0,3.92963e-17,image deformation,computer graphics,

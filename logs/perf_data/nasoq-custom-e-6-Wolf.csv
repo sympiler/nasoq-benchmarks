@@ -1,0 +1,7 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ,wolf_falling0,2058,32313,0,0,7,21,8,1e-06,0,0,1e-15,1e-09,2,15,0.0707364,7,4.2084e-07,0.0889534,-4.02433e+10,-0.0334671,-4.02433e+10,0,0.0525591,contact simulation,computer graphics,
+NASOQ,wolf_falling1,2058,32313,0,0,15,45,8,1e-06,0,0,1e-15,1e-09,2,31,0.123719,15,7.44838e-07,0.922427,-4.03611e+10,-7.47691,-4.03611e+10,0,5.15196,contact simulation,computer graphics,
+NASOQ,wolf_falling2,2058,32313,0,0,28,84,8,1e-06,0,0,1e-15,1e-09,2,58,0.127222,28,2.33038e-07,2.34137,-4.04293e+10,-21.2515,-4.04293e+10,0,17.7403,contact simulation,computer graphics,
+NASOQ,wolf_falling3,2058,32313,0,0,41,123,8,1e-06,0,0,1e-15,1e-09,2,79,0.143984,41,1.27552e-08,3.23652,-4.04533e+10,-42.6846,-4.04533e+10,0,17.5495,contact simulation,computer graphics,
+NASOQ,wolf_falling4,2058,32313,0,0,53,159,8,1e-06,0,0,1e-15,1e-09,2,101,0.176777,51,9.53292e-07,3.85555,-4.04421e+10,-7.97677,-4.04421e+10,0,3.73578,contact simulation,computer graphics,
+NASOQ,wolf_falling5,2058,32313,0,0,67,201,8,1e-06,0,0,1e-15,1e-09,2,123,0.199245,65,9.86124e-07,11.6194,-4.03515e+10,-55.6876,-4.03515e+10,0,22.6586,contact simulation,computer graphics,

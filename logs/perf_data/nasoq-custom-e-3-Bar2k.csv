@@ -1,0 +1,4 @@
+Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
+NASOQ,bar2k_floor2,1317,20517,0,0,219,657,8,0.001,0,0,1e-15,1e-09,1,7,0.052644,7,0.000701671,2.4385e-11,-0.0799512,8.99593e-16,-0.0799512,0,4.7223e-16,contact simulation,computer graphics,
+NASOQ,bar2k_floor3,1317,20517,0,0,219,657,8,0.001,0,0,1e-15,1e-09,1,8,0.0567047,8,0.000946821,1.01741e-10,-0.0814504,1.28805e-15,-0.0814504,0,7.31428e-16,contact simulation,computer graphics,
+NASOQ,bar2k_floor4,1317,20517,0,0,219,657,8,0.001,0,0,1e-15,1e-09,1,7,0.0552599,7,0.000859176,4.62768e-11,-0.083009,2.64046e-15,-0.083009,0,2.09947e-15,contact simulation,computer graphics,
