@@ -221,7 +221,7 @@ def merge_data(path):
                 if solver in f and p in f:
                     if solver == "osqp" and "osqp-polished" in f:
                         continue
-                    df = pd.read_csv(f, index_col=None, header=0, na_values="N/A", na_filter=False)
+                    df = pd.read_csv(f, index_col=False, header=0, na_values="N/A", na_filter=False)
                     li.append(df)
             if li:
                 frame = pd.concat(li, ignore_index=True)
