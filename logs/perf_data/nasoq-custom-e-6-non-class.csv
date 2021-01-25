@@ -1,2 +1,0 @@
-Tool Name,Problem Name,Hessian dim,Hessian NNZ,# of Eq Constraints,Eq Constraint NNZ,# of Ineq Const,Ineq Constraint NNZ,# of Threads,eps_abs,Outer GMRES Iter,Inner GMRES Iter,GMRES Tol,Diagonal Pert,Status,# of Iterations,Time (s),Active-set Size,Constraint Satisfaction Inf,Residual Lagrangian inf,Primal Obj,Dual Obj,Obj Value,Non-negativity Inf,Complementarity Inf,Problem Type,Problem Class,
-NASOQ,test05_0,185,185,125,2196,60,1890,16,1e-06,0,0,1e-15,1e-09,1,7,0.0138567,7,1.18327e-08,1.18288e-09,4.98204,8.71847e-10,4.98204,0,8.04753e-10,model predictive control,robotics,
