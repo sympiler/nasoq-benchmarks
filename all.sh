@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# this script invoke tests on given QPs
+
 DATASET=SMP_Repository/
 MKL_PATH=$MKLROOT
 METIS_PATH=/home/zjming1/metis-5.1.0/
 
+# input command: ./all.sh <QP folder> <path to MKL> <path to METIS>
 if [ "$#" -ge 3 ]; then
 DATASET=$1
 MKL_PATH=$2
@@ -12,12 +15,9 @@ fi
 eps=-3
 echo "Running solvers in $BUILDIR for QP problems in $DATASET ..."
 
+# enable OSQP
 source ${MKL_PATH}/bin/mklvars.sh intel64
 
-# make a directory for building project
-# if [ -d build ]; then
-#     rm -rf build
-# fi
 mkdir -p build
 cd build
 
@@ -30,25 +30,23 @@ cmake -DMETIS_ROOT_PATH=${METIS_PATH}/ -DCMAKE_BUILD_TYPE=Release ..
 # fi
 
 # build the project
-# if [ -d nasoq ]  && [ -d drivers ]; then
 make
-# fi
 
-# change to the root directory
+# change to the root directory of the project
 cd ..
 
 # make a directory for performance data
-# if [ -d logs/perf_data ]; then
-#     rm -rf logs/perf_data
-# fi
 mkdir -p logs/perf_data
 
 dir=$PWD
 cd $DATASET
 
+# run solvers on eps=-3 and -6
 for eps in {-3,-6}; do
+    # traverse through all files or folders in the dataset
     for d in *; do
         echo $d
+        # solve all QPs in a folder, and use folder name of the class name for QPs in the folder
         if [ -d "$d" ]; then
             echo "Running NASOQ-Fixed ..."
             if [ ! -f ${dir}/logs/perf_data/nasoq-fixed-e${eps}-${d}.csv ]; then
@@ -74,6 +72,7 @@ for eps in {-3,-6}; do
             if [ ! -f ${dir}/logs/perf_data/osqp-polished-e${eps}-${d}.csv ]; then
                 bash ${dir}/scripts/NASOQ_bench.sh ${dir}/build/drivers/osqp-bench $d $eps "-v polished"> ${dir}/logs/perf_data/osqp-polished-e${eps}-${d}.csv
             fi
+        # solve all QPs in the dataset but not in a folder, classify them as non-class
         else
             if [ "${d: -4}" == ".yml" ]; then
                 echo "Running NASOQ-Fixed ..."

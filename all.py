@@ -6,17 +6,31 @@ import matplotlib.pyplot as plt
 import shutil
 import glob
 
+"""
+this Python script compute all metrics based on
+the performance of solvers and then generate plots on them
+"""
+
+# time for computing geometric mean if the solver does not converge
 MAX_TIMING = 1e8
+# the status if a solver converges at the solver
 SOLUTION_PRESENT = [1, "solved"]
 
 def compute_failure_rate(status):
+    """
+    compute the failure rate for each solver
+    """
     tools_failure_rate = {}
 
     for tool in status.keys():
+        # failure rate = 1- (# successful cases / # all cases)
         tools_failure_rate[tool] = 1 - (float(status[tool].count(1) + status[tool].count("solved")) / float(len(status[tool])))
     return tools_failure_rate
 
 def compute_speedup(status, time_stat):
+    """
+    compute the speedup for each solver
+    """
     def geom_mean(t, shift=1.0):
         """Compute the shifted geometric mean using formula from
         http://plato.asu.edu/ftp/shgeom.html
@@ -30,6 +44,7 @@ def compute_speedup(status, time_stat):
 
     for tool in status.keys():
         time_stat_copy[tool] = []
+        # choose nasoq fixed as the ref while computing the speedup
         if "nasoq-fixed" in tool:
             ref = tool
 
@@ -39,23 +54,29 @@ def compute_speedup(status, time_stat):
             if status[tool][i] != 1 and status[tool][i] != "solved":
                 time_stat_copy[tool][i] = MAX_TIMING
             i += 1
+        # compute the geometric mean of running time for each solver
         gmean = geom_mean(np.array(time_stat_copy[tool]), 1.0)
         tools_speedup[tool] = gmean
     
+    # if nasoq fixed is not used, choose the first variate searched as ref
     if not ref:
         ref = list(status.key())[0]
     
     ref_gmean = tools_speedup[ref]
+    # compute the speedup for each solver
+    # speedup = geometric mean of time(ref) / geometric mean of time(another tool)
     for tool in status.keys():
         tools_speedup[tool] = ref_gmean / tools_speedup[tool]
     return tools_speedup
 
 def compute_performance_profile(status, time_stat):
+    """
+    compute the performance profile for each tool
+    a balance between speed and convergence
+    """
     time_stat_copy = {}
     for solver in status.keys():
         n_problems = len(status[solver])
-        # t[solver] = df["Time (s)"].values
-        # status[solver] = df["Status"].values
 
         time_stat_copy[solver] = []
         for idx in range(n_problems):
@@ -92,15 +113,14 @@ def compute_performance_profile(status, time_stat):
                     count_problems += 1
             rho[s][tau_idx] = count_problems / n_problems
 
-    # Store final pandas dataframe
-    # df_performance_profiles = pd.DataFrame(rho)
-    # df_performance_profiles.to_csv(plots_path + "diff_variates_performance_profile_eps{}.csv".format(eps), index=False)
     return rho
 
 def plot_histogram(data, title, tol):
+    """
+    plot the histogram plots for speedup and failure rate
+    """
     plt.figure(figsize=(10, 10))
     x = np.arange(len(list(data.keys())))
-    # width = 0.25
 
     ordered_keys = sorted(data.keys(), key=lambda x: x.lower())
     values = [data[ordered_keys[i]] for i in range(len(ordered_keys))]
@@ -166,20 +186,9 @@ def plot_histogram(data, title, tol):
                 va=va)                      # Vertically align label differently for
                                             # positive and negative values.
 
-
-    # plt.bar(x, height=values, width=width)
-    # Add some text for labels, title and custom x-axis tick labels, etc.
-    # plt.xticks(x, ordered_keys, rotation=30)
-    # plt.ylabel(title)
-    # plt.title('{} of all tools for tolerence {}'.format(title, tol))
-
-    # ax.set_ylabel(title)
-    # ax.set_title('{} of all tools for tolerence {}'.format(title, tol))
-    # plt.ylim(bottom=0)
-
+    # add the value on each bar
     add_value_labels(ax, title)   
 
-    # plt.grid()
     plt.tight_layout()
     plt.savefig("all_plots/" + title + "_tol{}".format(tol), dpi=300)
 
@@ -204,6 +213,12 @@ def plot_performance_profiles(rho, tol=''):
 
 
 def merge_data(path):
+    """
+    since the script makes performance data output csv by class
+    (each csv in the raw output is for a group of QPs in one folder),
+    this function merges all output csv into one by eps and tool
+    and store the merged table in the subfolder "merge"
+    """
     if os.path.exists(path + "/merge"):
         shutil.rmtree(path + "/merge")
     if not os.path.exists(path + "/merge"):
@@ -214,6 +229,7 @@ def merge_data(path):
 
     solvers = ["nasoq-fixed", "nasoq-tuned", "nasoq-custom", "gurobi", "mosek", "osqp", "osqp-polished"]
 
+    # merge csv tables by eps and solver
     for solver in solvers:
         for p in [p1, p2]:
             li = []
@@ -229,6 +245,10 @@ def merge_data(path):
 
 
 def read_dir(path):
+    """
+    read the merged data, compute the metrics (performance profile, speedup
+    and failure rate) and make plots on them
+    """
     if os.path.exists("all_plots/"):
         shutil.rmtree("all_plots/")
     os.makedirs("all_plots/")
@@ -268,12 +288,6 @@ def read_dir(path):
     tools_performance_profile_3 = compute_performance_profile(status_3, time_3)
     tools_performance_profile_6 = compute_performance_profile(status_6, time_6)
 
-    # print(tools_failure_rate_3)
-    # print(tools_failure_rate_6)
-    # print(tools_speedup_3)
-    # print(tools_speedup_6)
-    # print(tools_performance_profile_3)
-    # print(tools_performance_profile_6)
     plot_performance_profiles(tools_performance_profile_3, -3)
     plot_performance_profiles(tools_performance_profile_6, -6)
     plot_histogram(tools_failure_rate_3, "failure_rate", -3)
